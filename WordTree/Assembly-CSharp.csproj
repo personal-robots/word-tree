@@ -62,14 +62,116 @@
      <Compile Include="Assets\Scripts\WordCreation.cs" />
      <Compile Include="Assets\Scripts\WordProperties.cs" />
      <Compile Include="Assets\Scripts\WordTreeDirector.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Camera\Scripts\CameraController.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Board.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Exclusive.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Circle.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Colors.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\CustomTouchProxy.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\Init.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\LayerDelegate.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\RedirectInput.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Multiuser\Scripts\Logo.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Photos\Scripts\Container.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Photos\Scripts\SetColor.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Planet.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Rotator.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Vortex.cs" />
+     <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Ball.cs" />
+     <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Spawner.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Break.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Kick.cs" />
+     <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Spawn.cs" />
+     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
+     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\KillMe.cs" />
+     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Runner.cs" />
+     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Behaviors\TouchScriptInputModule.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Transformer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Visualizer\TouchProxy.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Visualizer\TouchVisualizer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Clusters\Clusters.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\DebuggableMonoBehaviour.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Devices\Display\DisplayDevice.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Devices\Display\GenericDisplayDevice.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Devices\Display\IDisplayDevice.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\GestureManagerInstance.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Base\PinnedTransformGestureBase.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Base\TransformGestureBase.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Clustered\ClusteredPinnedTransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Clustered\ClusteredScreenTransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Clustered\ClusteredTransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\FlickGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\Gesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\IGestureDelegate.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\ITransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\LongPressGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\MetaGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\PinnedTransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\PressGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\ReleaseGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\ScreenTransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\TapGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Gestures\UI\UIGesture.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Hit\HitTest.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Hit\TouchHit.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Hit\Untouchable.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\IDebuggable.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\IGestureManager.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\ITouchManager.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\ICoordinatesRemapper.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\IInputSource.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\MouseHandler.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\WindowsTouchHandlers.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\InputSource.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\MobileInput.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\MouseInput.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\InputSources\StandardInput.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\CameraLayer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\CameraLayer2D.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\CameraLayerBase.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\FullscreenLayer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\ILayerDelegate.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\ProjectionParams.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\TouchLayer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Layers\UILayer.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Tags.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\TouchManager.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\TouchManagerInstance.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\TouchPoint.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\NullToggleAttribute.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\ToggleLeftAttribute.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\ClusterUtils.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\Debug\DebugHelper.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\Debug\GLDebug.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\EventHandlerExtensions.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\TwoD.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\ObjectPool.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\ProjectionUtils.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\TimedSequence.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\TouchUtils.cs" />
+     <Compile Include="Assets\TouchScript\Scripts\Utils\TransformUtils.cs" />
+     <None Include="Assets\TouchScript\Shaders\DebugDepthTest.shader" />
+     <None Include="Assets\TouchScript\license.txt" />
+     <None Include="Assets\TouchScript\Shaders\DebugMultiplyDepthTest.shader" />
+     <None Include="Assets\TouchScript\Shaders\DebugNoDepthTest.shader" />
+     <None Include="Assets\TouchScript\Shaders\DebugMultiplyNoDepthTest.shader" />
+     <None Include="Assets\TouchScript\Examples\_misc\Shaders\UnlitColor.shader" />
+     <None Include="Assets\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
- <Reference Include="TouchScript">
- <HintPath>/Users/michalshlapentokh-rothman/Documents/UROP/word-tree/WordTree/Assets/Plugins/TouchScript.dll</HintPath>
+ <Reference Include="OSCsharp">
+ <HintPath>/Users/michalshlapentokh-rothman/Documents/UROP/word-tree/WordTree/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
+ </Reference>
+ <Reference Include="TUIOsharp">
+ <HintPath>/Users/michalshlapentokh-rothman/Documents/UROP/word-tree/WordTree/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

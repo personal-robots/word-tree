@@ -5,6 +5,8 @@ Project("{3595C0BD-BC43-E4D3-F3E1-AF378B8CA18A}") = "WordTree", "Assembly-CSharp
 EndProject
 Project("{3595C0BD-BC43-E4D3-F3E1-AF378B8CA18A}") = "WordTree", "Assembly-CSharp.csproj", "{E5C173AD-7E1D-40E4-1CA7-3CF3C9C2B12E}"
 EndProject
+Project("{3595C0BD-BC43-E4D3-F3E1-AF378B8CA18A}") = "WordTree", "Assembly-CSharp-Editor.csproj", "{39DEB772-BABA-F6F1-3FD7-F55B16DD8732}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{E5C173AD-7E1D-40E4-1CA7-3CF3C9C2B12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C173AD-7E1D-40E4-1CA7-3CF3C9C2B12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C173AD-7E1D-40E4-1CA7-3CF3C9C2B12E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DEB772-BABA-F6F1-3FD7-F55B16DD8732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DEB772-BABA-F6F1-3FD7-F55B16DD8732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DEB772-BABA-F6F1-3FD7-F55B16DD8732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DEB772-BABA-F6F1-3FD7-F55B16DD8732}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

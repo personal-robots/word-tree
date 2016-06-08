@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures;
-using TouchScript.Gestures.Simple;
 using TouchScript.Behaviors;
 using TouchScript.Hit;
 using System.Collections.Generic;
@@ -510,7 +509,7 @@ namespace WordTree
 
 				// choose first sound blank that is still draggable
 				// i.e. hasn't been dragged onto a jar/letter yet
-				if (go.GetComponent<PanGesture> ().enabled == true) {
+				if (go.GetComponent<TransformGesture> ().enabled == true) {
 
 					// get position of sound blank
 					Vector3 posn = go.transform.position;
@@ -585,7 +584,7 @@ namespace WordTree
 			foreach (GameObject go in mov){
 				// if pan gesture is still enabled, user has not dragged the movable object yet
 				// pan gesture becomes disabled after the movable object collides with a target object
-				if (go.GetComponent<PanGesture>().enabled == true)
+				if (go.GetComponent<TransformGesture>().enabled == true)
 					return false;
 			}
 
