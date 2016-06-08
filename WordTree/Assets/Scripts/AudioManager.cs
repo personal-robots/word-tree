@@ -34,10 +34,10 @@ namespace WordTree
 		void PlaySoundAndPulseLetter(GameObject go, float index)
 		{
 			//Check if object has audio clip attached
-			if (go.audio != null && go.audio.clip != null) {
+			if (go.GetComponent<AudioSource>() != null && go.GetComponent<AudioSource>().clip != null) {
 				Debug.Log ("Playing clip for " + go.name);
 				//Wait for previous letters to complete before playing audio clip
-				go.audio.PlayDelayed (index*clipLength);  
+				go.GetComponent<AudioSource>().PlayDelayed (index*clipLength);  
 			}
 
 			//Wait for previous letters to complete before pulsing
@@ -50,10 +50,10 @@ namespace WordTree
 		{	
 			//Check if word object has audio clip attached
 			GameObject go = GameObject.FindGameObjectWithTag ("WordObject");
-			if (go.audio != null && go.audio.clip != null) {
+			if (go.GetComponent<AudioSource>() != null && go.GetComponent<AudioSource>().clip != null) {
 				Debug.Log ("Playing clip for " + go.name);
 				//Wait for previous letters to complete before playing audio clip
-				go.audio.PlayDelayed ((gos.Length) * clipLength);
+				go.GetComponent<AudioSource>().PlayDelayed ((gos.Length) * clipLength);
 			}
 
 			//Wait for all letters to complete before pulsing

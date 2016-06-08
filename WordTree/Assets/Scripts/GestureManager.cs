@@ -143,8 +143,8 @@ namespace WordTree
 				go.GetComponent<PulseBehavior>().StopPulsing(go);
 				BounceKid(go);
 				go.AddComponent<AudioSource>().clip = Resources.Load ("Audio/KidSpeaking/Intro") as AudioClip;
-				if (go.audio.clip != null)
-					go.audio.Play ();
+				if (go.GetComponent<AudioSource>().clip != null)
+					go.GetComponent<AudioSource>().Play ();
 
 				// keep track of which kid was tapped on (boy or girl)
 				ProgressManager.chosenKid = go.name;
@@ -194,7 +194,7 @@ namespace WordTree
 
 			// play word's sound when tapped
 			if (go.tag == "WordObject" && Application.loadedLevelName != "3. Choose Object")
-				go.audio.Play ();
+				go.GetComponent<AudioSource>().Play ();
 
 			// if home button is tapped, go back to the intro scene
 			if (go.name == "HomeButton")
@@ -213,7 +213,7 @@ namespace WordTree
 
 			// if sound button is tapped, play word's sound
 			if (go.name == "SoundButton")
-				GameObject.FindGameObjectWithTag ("WordObject").audio.Play ();
+				GameObject.FindGameObjectWithTag ("WordObject").GetComponent<AudioSource>().Play ();
 
 			// if hint button is tapped, show a hint
 			if (go.name == "HintButton") {
@@ -386,8 +386,8 @@ namespace WordTree
 				// Load audio onto kid
 				kid.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/TumbleSound") as AudioClip;
 				// Play audio clip attached to kid if it exists
-				if (kid.audio.clip != null)
-					kid.audio.Play ();
+				if (kid.GetComponent<AudioSource>().clip != null)
+					kid.GetComponent<AudioSource>().Play ();
 			}
 		}
 
@@ -411,7 +411,7 @@ namespace WordTree
 			// Play audio clip attached to object if it exists
 			if (auds != null && auds.clip != null) {
 				Debug.Log("Playing clip for " + go.name);
-				go.audio.Play ();  
+				go.GetComponent<AudioSource>().Play ();  
 			} 
 			else {
 				Debug.Log ("No clip found for " + go.name);

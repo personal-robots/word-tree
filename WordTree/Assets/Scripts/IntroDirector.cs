@@ -28,8 +28,8 @@ namespace WordTree
 			// load Background music onto IntroDirector
 			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/WordTree") as AudioClip;
 			// play background music if attached
-			if (dir.audio.clip != null)
-				dir.audio.Play ();
+			if (dir.GetComponent<AudioSource>().clip != null)
+				dir.GetComponent<AudioSource>().Play ();
 
 			ProgressManager.lockStatus = "";
 	
@@ -41,8 +41,8 @@ namespace WordTree
 			GameObject dir = GameObject.Find ("IntroDirector");
 			//If attached audio (background music) has stopped playing, play the audio
 			//For keeping background music playing in a loop
-			if (!dir.audio.isPlaying)
-				dir.audio.Play ();
+			if (!dir.GetComponent<AudioSource>().isPlaying)
+				dir.GetComponent<AudioSource>().Play ();
 
 		}
 	

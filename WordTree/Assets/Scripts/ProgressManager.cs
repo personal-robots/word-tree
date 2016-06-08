@@ -187,9 +187,9 @@ namespace WordTree
 
 			foreach (GameObject go in gos) {
 				// make level icon appear
-				Color color = go.renderer.material.color;
+				Color color = go.GetComponent<Renderer>().material.color;
 				color.a = 1f;
-				go.renderer.material.color = color;
+				go.GetComponent<Renderer>().material.color = color;
 
 				// darken level icon - indicates level not yet completed
 				go.GetComponent<SpriteRenderer>().color = Color.grey;
@@ -213,9 +213,9 @@ namespace WordTree
 				// if level hasn't been unlocked yet
 				if (!ProgressManager.IsLevelUnlocked (go.name)) {
 					// make level icon disappear
-					Color color = go.renderer.material.color;
+					Color color = go.GetComponent<Renderer>().material.color;
 					color.a = 0f;
-					go.renderer.material.color = color;
+					go.GetComponent<Renderer>().material.color = color;
 
 					// stop pulsing and reset scale for level icon
 					go.GetComponent<PulseBehavior>().StopPulsing(go);

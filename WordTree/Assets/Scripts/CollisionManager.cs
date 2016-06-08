@@ -30,9 +30,9 @@ namespace WordTree
 
 					// change color of target letter to match that of movable letter
 					gameObject.GetComponent<SpriteRenderer> ().color = other.GetComponent<SpriteRenderer> ().color;
-					Color color = gameObject.renderer.material.color;
+					Color color = gameObject.GetComponent<Renderer>().material.color;
 					color.a = 1.0f;
-					gameObject.renderer.material.color = color;
+					gameObject.GetComponent<Renderer>().material.color = color;
 
 					// destroy movable letter
 					Debug.Log ("Destroyed draggable letter " + other.gameObject.name);
@@ -133,7 +133,7 @@ namespace WordTree
 						ResetIncorrectLetters(1f);
 
 						// play word's sound
-						GameObject.FindGameObjectWithTag("WordObject").audio.PlayDelayed (1f);
+						GameObject.FindGameObjectWithTag("WordObject").GetComponent<AudioSource>().PlayDelayed (1f);
 
 						// flash hint button to call attention to it
 						FlashHintButton (2f);
@@ -216,7 +216,7 @@ namespace WordTree
 						ResetIncorrectSounds (1f);
 
 						// play word's sound 
-						GameObject.FindGameObjectWithTag("WordObject").audio.PlayDelayed (1f);
+						GameObject.FindGameObjectWithTag("WordObject").GetComponent<AudioSource>().PlayDelayed (1f);
 
 						// flash hint button to call attention to it
 						FlashHintButton (2f);
@@ -484,7 +484,7 @@ namespace WordTree
 			hint.transform.position = unoccupiedTargets [i].transform.position;
 
 			// play phoneme sound of the letter
-			unoccupiedTargets [i].audio.Play ();
+			unoccupiedTargets [i].GetComponent<AudioSource>().Play ();
 
 			// move letter in front of the background (to z = -3) to make visible
 			LeanTween.moveZ(hint, -3, .01f).setDelay (0f);
@@ -532,7 +532,7 @@ namespace WordTree
 					hint.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, 3);
 
 					// play phoneme sound of letter
-					go.audio.PlayDelayed (1f);
+					go.GetComponent<AudioSource>().PlayDelayed (1f);
 
 					// letter fades in and moves in front of background to z = -3
 					LeanTween.alpha (hint, 0f, .01f);

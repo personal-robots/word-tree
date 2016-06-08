@@ -81,9 +81,9 @@ namespace WordTree
 			foreach (GameObject go in tar) {
 				SpriteRenderer sprite = go.GetComponent<SpriteRenderer> ();
 				sprite.color = Color.black;
-				Color color = go.renderer.material.color;
+				Color color = go.GetComponent<Renderer>().material.color;
 				color.a = .5f;
-				go.renderer.material.color = color;
+				go.GetComponent<Renderer>().material.color = color;
 			}
 
 			GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableLetter");

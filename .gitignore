@@ -28,22 +28,9 @@ word-tree/*.sln*
 Icon?
 ehthumbs.db
 [Tt]humbs.db 
+[Tt]humbs.db.meta
+
 # ======================== #
 # ignore packaged app also #
 # ======================== #
 *.apk
-# ======================================================== #
-# app content - images and audio - except for some samples
-# ======================================================== #
-word-tree/Assets/Resources/audio/*.wav
-word-tree/Assets/Resources/audio/*.wav.meta
-word-tree/Assets/Resources/graphics/base-images/*.png
-word-tree/Assets/Resources/graphics/base-images/*.png.meta
-!word-tree/Assets/Resources/audio/chimes.wav
-!word-tree/Assets/Resources/audio/chimes.wav.meta
-!word-tree/Assets/Resources/audio/wakeup.wav
-!word-tree/Assets/Resources/audio/wakeup.wav.meta
-!word-tree/Assets/Resources/graphics/base-images/BlueBird.png
-!word-tree/Assets/Resources/graphics/base-images/BlueBird.png.meta
-!word-tree/Assets/Resources/graphics/base-images/dragon.png
-!word-tree/Assets/Resources/graphics/base-images/dragon.png.meta

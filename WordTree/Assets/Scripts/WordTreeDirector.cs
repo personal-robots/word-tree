@@ -30,8 +30,8 @@ namespace WordTree
 			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/WordTree") as AudioClip;
 
 			// play background music if attached to director
-			if (dir.audio.clip != null)
-				dir.audio.Play ();
+			if (dir.GetComponent<AudioSource>().clip != null)
+				dir.GetComponent<AudioSource>().Play ();
 
 			// subscribe home button to gestures
 			GameObject home = GameObject.Find ("HomeButton");
@@ -54,9 +54,9 @@ namespace WordTree
 
 				// if level is not unlocked yet, make level icon disappear
 				if (!ProgressManager.IsLevelUnlocked(go.name)){
-					Color color = go.renderer.material.color;
+					Color color = go.GetComponent<Renderer>().material.color;
 					color.a = 0f;
-					go.renderer.material.color = color;
+					go.GetComponent<Renderer>().material.color = color;
 				}
 
 				// if level has been unlocked
@@ -95,8 +95,8 @@ namespace WordTree
 
 			// keep background music playing in a loop
 			GameObject dir = GameObject.Find ("WordTreeDirector");
-			if (!dir.audio.isPlaying)
-				dir.audio.Play ();
+			if (!dir.GetComponent<AudioSource>().isPlaying)
+				dir.GetComponent<AudioSource>().Play ();
 			
 		}
 
@@ -120,7 +120,7 @@ namespace WordTree
 				kid.transform.position = GameObject.Find (ProgressManager.currentLevel + ProgressManager.currentMode).transform.position;
 
 				// move kid to bottom left hand corner of screen
-				LeanTween.move (kid, new Vector3 (-7.5f, -3.5f, -2), 1f);s
+				LeanTween.move (kid, new Vector3 (-7.5f, -3.5f, -2), 1f);
 			}
 		}
 

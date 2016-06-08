@@ -24,10 +24,10 @@ namespace WordTree
 			//Load audio for kid
 			kid.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/KidSpeaking/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
-			if (kid.audio.clip != null) {
-				kid.audio.priority = 255;
+			if (kid.GetComponent<AudioSource>().clip != null) {
+				kid.GetComponent<AudioSource>().priority = 255;
 				//Play audio clip attached to kid if there is one
-				kid.audio.Play ();
+				kid.GetComponent<AudioSource>().Play ();
 			}
 
 			//Find ChooseObjectDirector gameObject
@@ -35,10 +35,10 @@ namespace WordTree
 			//Load background music for scene onto ChooseObjectDirector
 			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
-			if (dir.audio.clip != null) {
-				dir.audio.volume = .7f;
+			if (dir.GetComponent<AudioSource>().clip != null) {
+				dir.GetComponent<AudioSource>().volume = .7f;
 				//Start playing background music if attached
-				dir.audio.Play ();
+				dir.GetComponent<AudioSource>().Play ();
 			}
 
 			//Subscribe buttons to touch gestures
@@ -84,8 +84,8 @@ namespace WordTree
 
 			//If attached audio (background music) has stopped playing, play the audio
 			//For keeping background music playing in a loop
-			if (!dir.audio.isPlaying)
-				dir.audio.Play ();
+			if (!dir.GetComponent<AudioSource>().isPlaying)
+				dir.GetComponent<AudioSource>().Play ();
 			
 		}
 
@@ -103,9 +103,9 @@ namespace WordTree
 		void SetColorAndTransparency(GameObject go, Color color, float transparency)
 		{
 			//Set transparency
-			Color temp = go.renderer.material.color;
+			Color temp = go.GetComponent<Renderer>().material.color;
 			temp.a = transparency;
-			go.renderer.material.color = temp;
+			go.GetComponent<Renderer>().material.color = temp;
 
 			//Set color
 			go.GetComponent<SpriteRenderer>().color = color;
