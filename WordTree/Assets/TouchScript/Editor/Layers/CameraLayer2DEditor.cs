@@ -1,7 +1,7 @@
 /*
  * @author Valentin Simonov / http://va.lent.in/
  */
-/*
+
 using System;
 using System.Reflection;
 using TouchScript.Layers;
@@ -79,4 +79,3 @@ namespace TouchScript.Editor.Layers
 
 
 
-*/
