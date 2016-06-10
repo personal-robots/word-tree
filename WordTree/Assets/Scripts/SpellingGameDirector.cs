@@ -126,8 +126,8 @@ namespace WordTree
 			float objScale = WordProperties.GetWordProperties (go.name).ObjScale ();
 			LeanTween.scale (go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay (delayTime);
 			LeanTween.scale (go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay (delayTime + time);
-			LeanTween.scale (go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay (delayTime + 2*time);
-			LeanTween.scale (go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay (delayTime + 3*time);
+			LeanTween.scale (go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay (delayTime + 2 * time);
+			LeanTween.scale (go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay (delayTime + 3 * time);
 			LeanTween.scale (go, new Vector3 (objScale * 1f, objScale * 1f, 1), time).setDelay (delayTime + 4 * time);
 
 			// play cheerful sound
@@ -135,8 +135,13 @@ namespace WordTree
 			AudioSource audio = go.AddComponent<AudioSource> ();
 			audio.clip = Resources.Load ("Audio/CongratsSound") as AudioClip;
 			audio.PlayDelayed (delayTime);
+		}
+			void Update(){
 
-			
+				
+				// if user presses escape or 'back' button on android, exit program
+				if(Input.GetKeyDown(KeyCode.Escape))
+					Application.Quit();
 		}
 
 

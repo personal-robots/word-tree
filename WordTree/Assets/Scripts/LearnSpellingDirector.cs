@@ -75,7 +75,10 @@ namespace WordTree
 
 			int y1 = 3; // y-position
 			int y2 = 2; // y-position
-			int z = -2; // z-position
+			int z = -2; //z-position
+
+		
+				
 
 			// set final positions for letters after explosion
 			if (gos.Length == 3) {
@@ -173,10 +176,10 @@ namespace WordTree
 			Debug.Log ("Spinning " + go.name);
 
 			// spin object around once
-			LeanTween.rotateAround (go, Vector3.forward, 360f, time).setDelay(delayTime);
+			LeanTween.rotateAround (go, Vector3.forward, 360f, time).setDelay (delayTime);
 
 			// scale object up
-			LeanTween.scale (go,new Vector3(go.transform.localScale.x*1.3f,go.transform.localScale.y*1.3f,1),time).setDelay (delayTime);
+			LeanTween.scale (go, new Vector3 (go.transform.localScale.x * 1.3f, go.transform.localScale.y * 1.3f, 1), time).setDelay (delayTime);
 
 			// move object down
 			LeanTween.moveY (go, 1.5f, time).setDelay (delayTime);
@@ -184,13 +187,20 @@ namespace WordTree
 			// move target letters down
 			GameObject[] tar = GameObject.FindGameObjectsWithTag ("TargetLetter");
 			foreach (GameObject letter in tar)
-				LeanTween.moveY (letter,-3f,time).setDelay(delayTime);
+				LeanTween.moveY (letter, -3f, time).setDelay (delayTime);
 
 			// play sound 
 			Debug.Log ("Playing clip for congrats");
 			AudioSource audio = go.AddComponent<AudioSource> ();
 			audio.clip = Resources.Load ("Audio/CongratsSound") as AudioClip;
 			audio.PlayDelayed (delayTime);
+		}
+		void Update(){
+
+
+			// if user presses escape or 'back' button on android, exit program
+			if(Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
 
 		}
 

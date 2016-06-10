@@ -121,8 +121,8 @@ namespace WordTree
 			Debug.Log ("Wiggling " + go.name);
 			LeanTween.rotateAround (go, Vector3.forward, 80f, time).setDelay (delayTime);
 			LeanTween.rotateAround (go, Vector3.back, 160f, time).setDelay (delayTime + time);
-			LeanTween.rotateAround (go, Vector3.forward, 160f, time).setDelay (delayTime + 2*time);
-			LeanTween.rotateAround (go, Vector3.back, 160f, time).setDelay (delayTime + 3*time);
+			LeanTween.rotateAround (go, Vector3.forward, 160f, time).setDelay (delayTime + 2 * time);
+			LeanTween.rotateAround (go, Vector3.back, 160f, time).setDelay (delayTime + 3 * time);
 			LeanTween.rotateAround (go, Vector3.forward, 80f, time).setDelay (delayTime + 4 * time);
 
 			// play cheerful sound
@@ -130,6 +130,13 @@ namespace WordTree
 			AudioSource audio = go.AddComponent<AudioSource> ();
 			audio.clip = Resources.Load ("Audio/CongratsSound") as AudioClip;
 			audio.PlayDelayed (delayTime);
+		}
+		void Update(){
+
+
+			// if user presses escape or 'back' button on android, exit program
+			if(Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
 			
 			
 		}
