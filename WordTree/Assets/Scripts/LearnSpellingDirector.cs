@@ -73,12 +73,10 @@ namespace WordTree
 			Vector3[] posn = new Vector3[gos.Length]; // contains desired position to move each letter to
 			Vector3[] shuffledPosn = new Vector3[gos.Length]; // contains the new positions after being shuffled
 
-			System.Random rnd = new System.Random ();
 			int y1 = 3; // y-position
 			int y2 = 2; // y-position
 			int z = -2; //z-position
-			//int z = rnd.Next(-5, 5); // z-position
-			//System.Console.WriteLine(z);
+
 		
 				
 

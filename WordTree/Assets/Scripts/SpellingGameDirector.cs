@@ -138,7 +138,7 @@ namespace WordTree
 		}
 			void Update(){
 
-				GameObject dir = GameObject.Find ("IntroDirector");
+				
 				// if user presses escape or 'back' button on android, exit program
 				if(Input.GetKeyDown(KeyCode.Escape))
 					Application.Quit();

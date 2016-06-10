@@ -34,3 +34,4 @@ ehthumbs.db
 # ignore packaged app also #
 # ======================== #
 *.apk
+*.csproj 
