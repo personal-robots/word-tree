@@ -86,6 +86,9 @@ namespace WordTree
 			//For keeping background music playing in a loop
 			if (!dir.GetComponent<AudioSource>().isPlaying)
 				dir.GetComponent<AudioSource>().Play ();
+			// if user presses escape or 'back' button on android, exit program
+			if(Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
 			
 		}
 
@@ -189,6 +192,7 @@ namespace WordTree
 
 			//Create background
 			CreateBackGround (level, backgroundPosn, backgroundScale);
+
 
 		}
 
