@@ -84,9 +84,9 @@ namespace WordTree
 			if (gos.Length == 3) {
 
 				posn = new Vector3[3] {
-					new Vector3 (-6, 0, 1),
-					new Vector3 (5, y2, 2),
-					new Vector3 (7, -y1, 3)
+					new Vector3 (-6, 0, z),
+					new Vector3 (5, y2, z),
+					new Vector3 (7, -y1, z)
 				};
 			}
 			if (gos.Length == 4) {
