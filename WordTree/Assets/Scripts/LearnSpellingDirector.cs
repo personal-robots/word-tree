@@ -193,12 +193,19 @@ namespace WordTree
 			audio.PlayDelayed (delayTime);
 
 		}
-		void Update ()
-		{
+
+		// Called once per frame
+		void Update(){
+
+			// keep background music playing in a loop
+			GameObject dir = GameObject.Find ("WordTreeDirector");
+			if (!dir.GetComponent<AudioSource>().isPlaying)
+				dir.GetComponent<AudioSource>().Play ();
 			// if user presses escape or 'back' button on android, exit program
-			if (Input.GetKeyDown (KeyCode.Escape))
-				Application.Quit ();
-		}	
+			if(Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
+
+		}
 
 
 	}

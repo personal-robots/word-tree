@@ -87,8 +87,10 @@ namespace WordTree
 			if (!dir.GetComponent<AudioSource>().isPlaying)
 				dir.GetComponent<AudioSource>().Play ();
 			// if user presses escape or 'back' button on android, exit program
+<<<<<<< 32576a0f8eb3287a348f51c9d1866a0a9195b3d4
 			if (Input.GetKeyDown (KeyCode.Escape))
 				Application.Quit ();
+
 			
 		}
 

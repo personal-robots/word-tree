@@ -15,7 +15,7 @@ namespace WordTree
 		//Play each letter's sound and pulse it, then do same for entire word
 		public void SpellOutWord(GameObject[] gos)
 		{
-			
+
 			PlaySoundAndPulseLetter (gos[0], 0);
 			PlaySoundAndPulseLetter (gos[1], 1);
 			PlaySoundAndPulseLetter (gos[2], 2);
@@ -23,9 +23,9 @@ namespace WordTree
 				PlaySoundAndPulseLetter (gos[3], 3);
 			if (gos.Length >= 5)
 				PlaySoundAndPulseLetter (gos[4], 4);
-			
+
 			PlaySoundAndPulseWord (gos);
-			
+
 		}
 
 		//Play audio clip for while pulsing the letter once
@@ -120,7 +120,7 @@ namespace WordTree
 				}
 			}
 			Debug.Log ("Pulse on word");
-			
+
 		}
 
 
