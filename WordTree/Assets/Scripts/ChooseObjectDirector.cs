@@ -6,10 +6,11 @@ using System.Collections;
 
 namespace WordTree
 {
-	public class ChooseObjectDirector : MonoBehaviour {
-
+	public class ChooseObjectDirector : MonoBehaviour { 
 		//Called on start, used to initialize stuff
 		void Start () {
+			//create instance of grestureManager
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			//Create objects and background
 			LoadLevel (ProgressManager.currentLevel);
@@ -43,7 +44,7 @@ namespace WordTree
 
 			//Subscribe buttons to touch gestures
 			GameObject button = GameObject.FindGameObjectWithTag ("Button");
-			button.AddComponent<GestureManager> ().AddAndSubscribeToGestures (button);
+			gestureManager.AddAndSubscribeToGestures (button);
 
 			//Find word objects
 			GameObject[] gos = GameObject.FindGameObjectsWithTag ("WordObject");

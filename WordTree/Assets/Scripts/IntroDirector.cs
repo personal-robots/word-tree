@@ -7,9 +7,10 @@ using System.Collections;
 namespace WordTree
 {
 	public class IntroDirector : MonoBehaviour {
-
-		// Called on start, used to initialize stuff
+			// Called on start, used to initialize stuff
 		void Start () {
+		//create instance of grestureManager
+		 GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// find kid
 			GameObject[] kids = GameObject.FindGameObjectsWithTag ("Kid");
@@ -19,7 +20,7 @@ namespace WordTree
 				kid.AddComponent<PulseBehavior> ().StartPulsing (kid);
 
 				// subscribe kid to touch gestures
-				kid.AddComponent<GestureManager> ().AddAndSubscribeToGestures (kid);
+				gestureManager.AddAndSubscribeToGestures(kid);
 			}
 
 			// find IntroDirector

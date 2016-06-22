@@ -10,16 +10,27 @@ using TouchScript.Hit;
 
 namespace WordTree
 {
+	
 	public class GestureManager : MonoBehaviour {
-		
+		   
 		// store camera parameters for adjusting screen size
 		//convert camera parameters to world view for calculations
-		//create rectangle witin screen boundaries
-		public Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
-		public Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
-			Camera.main.pixelHeight));
-		public Rect CameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 
+		 
+
+
+
+		
+		//creates rectangle to limit where objects can go on the screen
+		public  Rect Start(){
+			Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
+			Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
+				Camera.main.pixelHeight));
+			Rect cameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
+			return cameraRect;
+
+	
+		}
 		// subscribes an object to all relevant gestures, according to its tag
 		public void AddAndSubscribeToGestures (GameObject go)
 		{
@@ -233,6 +244,8 @@ namespace WordTree
 				if (Application.loadedLevelName == "6. Sound Game")
 					CollisionManager.ShowSoundHint ();
 			}
+			//create instance of GestureManager
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// if the closed lock icon is tapped, unlock all levels of the word tree
 			if (go.name == "LockClosed") {
@@ -241,12 +254,12 @@ namespace WordTree
 
 				// move closed lock icon to behind the background and disable touch gestures
 				LeanTween.moveZ (go, 3f, .01f);
-				go.GetComponent<GestureManager>().DisableGestures(go);
+				gestureManager.DisableGestures(go);
 
 				// move open lock icon in front of background and subscribe to touch gestures
 				GameObject lockOpen = GameObject.Find ("LockOpen");
 				LeanTween.moveZ (lockOpen,-2f,.01f);
-				lockOpen.AddComponent<GestureManager>().AddAndSubscribeToGestures(lockOpen);
+				gestureManager.AddAndSubscribeToGestures(lockOpen);
 
 			}
 
@@ -257,12 +270,12 @@ namespace WordTree
 
 				// move open lock icon to behind background and disable touch gestures
 				LeanTween.moveZ (go, 3f, .01f);
-				go.GetComponent<GestureManager>().DisableGestures(go);
+				gestureManager.DisableGestures(go);
 
 				// move closed lock icon in front of background and subscribe to touch gestures
 				GameObject lockClosed = GameObject.Find ("LockClosed");
 				LeanTween.moveZ (lockClosed,-2f,.01f);
-				lockClosed.AddComponent<GestureManager>().AddAndSubscribeToGestures(lockClosed);
+				gestureManager.AddAndSubscribeToGestures(lockClosed);
 			}
 
 			// if any button is tapped, darken the button briefly to indicate to user that 
@@ -427,16 +440,21 @@ namespace WordTree
 				Debug.Log ("No clip found for " + go.name);
 			}
 		}
-		void Update(){
-			
-			//changes transform.position of most recently hit gameObject
-			//that was previously set in the class 'panned Handler'
-			//restricits the position of gameObject to rectangle
 
-			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, CameraRect.xMin, CameraRect.xMax),
-				Mathf.Clamp (transform.position.y, CameraRect.yMin, CameraRect.yMax), transform.position.z);
+			
+				
+		
+		void Update(){
+		
+			//changes transform.position of most recently hit gameObject
+			//restricits the position of gameObject to rectangle
+			Rect cameraRect;
+			cameraRect = Start ();
+			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, cameraRect.xMin, cameraRect.xMax),
+				Mathf.Clamp (transform.position.y, cameraRect.yMin, cameraRect.yMax), transform.position.z);
 		}
 
+		
 
 	}
 		

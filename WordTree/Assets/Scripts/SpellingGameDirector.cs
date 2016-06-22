@@ -7,9 +7,11 @@ using System.Collections;
 namespace WordTree
 {
 	public class SpellingGameDirector : MonoBehaviour {
-
+		 
 		// called on start, initialize stuff
 		void Start () {
+			//create instance of grestureManager
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// create letters, blanks, and word object
 			LoadSpellingGameWord (ProgressManager.currentWord);
@@ -17,7 +19,7 @@ namespace WordTree
 			// subscribe buttons to gestures
 			GameObject[] buttons = GameObject.FindGameObjectsWithTag ("Button");
 			foreach (GameObject button in buttons)
-				button.AddComponent<GestureManager> ().AddAndSubscribeToGestures (button);
+				gestureManager.AddAndSubscribeToGestures (button);
 
 			// sound out word
 			GameObject[] tar = GameObject.FindGameObjectsWithTag("TargetBlank");

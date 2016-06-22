@@ -7,9 +7,10 @@ using System.Collections;
 namespace WordTree
 {
 	public class WordTreeDirector : MonoBehaviour {
-
-		// called on start, initialize stuff
+		 // called on start, initialize stuff
 		void Start () {
+			//create instance of grestureManager
+			GestureManager gestureManager = GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// add all levels onto level list
 			ProgressManager.InitiateLevelList ();
@@ -35,7 +36,7 @@ namespace WordTree
 
 			// subscribe home button to gestures
 			GameObject home = GameObject.Find ("HomeButton");
-			home.AddComponent<GestureManager> ().AddAndSubscribeToGestures (home);
+			gestureManager.AddAndSubscribeToGestures (home);
 
 			// set up lock - lock starts out as closed
 			GameObject Lock = GameObject.Find (ProgressManager.lockStatus);
@@ -43,7 +44,7 @@ namespace WordTree
 				Lock = GameObject.Find ("LockClosed");
 
 			// subscribe lock to gestures
-			Lock.AddComponent<GestureManager> ().AddAndSubscribeToGestures (Lock);
+			gestureManager.AddAndSubscribeToGestures (Lock);
 
 			// move lock to front
 			LeanTween.moveZ (Lock, -2f, .01f);
@@ -63,7 +64,7 @@ namespace WordTree
 				if (ProgressManager.IsLevelUnlocked(go.name))
 				{
 					// subscribe level icon to gestures
-					go.AddComponent<GestureManager>().AddAndSubscribeToGestures(go);
+					gestureManager.AddAndSubscribeToGestures(go);
 
 					// start pulsing level icon
 					go.AddComponent<PulseBehavior> ().StartPulsing (go);

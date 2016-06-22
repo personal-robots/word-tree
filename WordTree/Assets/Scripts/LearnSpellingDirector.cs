@@ -6,10 +6,11 @@ using System.Collections;
 
 namespace WordTree
 {
-	public class LearnSpellingDirector : MonoBehaviour {
-
+	public class LearnSpellingDirector : MonoBehaviour { 
 		// called on start, initialize stuff
 		void Start () {
+			//create instance of grestureManager
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// create two sets of words - movable and target
 			LoadSpellingLesson (ProgressManager.currentWord);
@@ -17,7 +18,7 @@ namespace WordTree
 			// subscribe buttons to gestures
 			GameObject[] buttons = GameObject.FindGameObjectsWithTag ("Button");
 			foreach (GameObject button in buttons)
-				button.AddComponent<GestureManager> ().AddAndSubscribeToGestures (button);
+				gestureManager.AddAndSubscribeToGestures (button);
 
 			// play word's sound
 			GameObject word = GameObject.FindGameObjectWithTag ("WordObject");
