@@ -13,10 +13,12 @@ namespace WordTree
 	public class GestureManager : MonoBehaviour {
 		
 		// store camera parameters for adjusting screen size
-		//convert camera parameters to world view for calculations 
+		//convert camera parameters to world view for calculations
+		//create rectangle witin screen boundaries
 		public Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
 		public Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
 			Camera.main.pixelHeight));
+		public Rect CameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 
 		// subscribes an object to all relevant gestures, according to its tag
 		public void AddAndSubscribeToGestures (GameObject go)
@@ -427,11 +429,10 @@ namespace WordTree
 		}
 		void Update(){
 			
-			//creates rectangle within screen boundaries
-			//restricits the position of gameObject to rectangle 
 			//changes transform.position of most recently hit gameObject
 			//that was previously set in the class 'panned Handler'
-			var CameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
+			//restricits the position of gameObject to rectangle
+
 			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, CameraRect.xMin, CameraRect.xMax),
 				Mathf.Clamp (transform.position.y, CameraRect.yMin, CameraRect.yMax), transform.position.z);
 		}
