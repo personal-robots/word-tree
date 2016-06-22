@@ -11,6 +11,12 @@ using TouchScript.Hit;
 namespace WordTree
 {
 	public class GestureManager : MonoBehaviour {
+		
+		// store camera parameters for adjusting screen size
+		//convert camera parameters to world view for calculations 
+		public Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
+		public Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
+			Camera.main.pixelHeight));
 
 		// subscribes an object to all relevant gestures, according to its tag
 		public void AddAndSubscribeToGestures (GameObject go)
@@ -58,6 +64,9 @@ namespace WordTree
 				Debug.Log (go.name + " subscribed to press events");
 			}
 		}
+
+
+		
 
 		// enable all gesture events
 		public void EnableGestures (GameObject go)
@@ -338,6 +347,7 @@ namespace WordTree
 				Debug.Log ("PAN on " + gesture.gameObject.name + " at " + hit.Point);
 
 				// move the object with the drag
+				//sets position of most recently touched game object
 				gesture.gameObject.transform.position = new Vector3(hit.Point.x,hit.Point.y,-2);
 
 				// TODO make sure the object being dragged can't fly off the screen
@@ -416,16 +426,18 @@ namespace WordTree
 			}
 		}
 		void Update(){
-			// get info about where the hit object was located when the gesture was recognized
-			var bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
-			var topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, Camera.main.pixelHeight));
-
+			
+			//creates rectangle within screen boundaries
+			//restricits the position of gameObject to rectangle 
+			//changes transform.position of most recently hit gameObject
+			//that was previously set in the class 'panned Handler'
 			var CameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
-			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, CameraRect.xMin, CameraRect.xMax), Mathf.Clamp (transform.position.y, CameraRect.yMin, CameraRect.yMax), transform.position.z);
-		}
+			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, CameraRect.xMin, CameraRect.xMax),
+				Mathf.Clamp (transform.position.y, CameraRect.yMin, CameraRect.yMax), transform.position.z);
 		}
 
-		
-		
+
 	}
+		
+
 }
