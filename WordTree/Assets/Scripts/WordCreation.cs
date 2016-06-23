@@ -39,7 +39,7 @@ namespace WordTree
 			}
 
 			// get original position of each letter
-			GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 			for (int i=0; i<mov.Length; i++)
 				posn [i] = mov[i].transform.position;
 
@@ -77,7 +77,7 @@ namespace WordTree
 			CreateWord (word, soundArray, "TargetLetter", "Learn");
 
 			// change color of target letters to a faded out gray
-			GameObject[] tar = GameObject.FindGameObjectsWithTag ("TargetLetter");
+			GameObject[] tar = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_TARGET_LETTER);
 			foreach (GameObject go in tar) {
 				SpriteRenderer sprite = go.GetComponent<SpriteRenderer> ();
 				sprite.color = Color.black;
@@ -86,7 +86,7 @@ namespace WordTree
 				go.GetComponent<Renderer>().material.color = color;
 			}
 
-			GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 			// set possible colors for movable letters
 			Color[] colors = new Color[] {Color.cyan,Color.blue,Color.magenta,Color.grey,Color.yellow};
 			// change each movable letter to different color

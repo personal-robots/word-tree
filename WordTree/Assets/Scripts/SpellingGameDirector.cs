@@ -11,23 +11,23 @@ namespace WordTree
 		// called on start, initialize stuff
 		void Start () {
 			//create instance of grestureManager
-			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			// create letters, blanks, and word object
 			LoadSpellingGameWord (ProgressManager.currentWord);
 
 			// subscribe buttons to gestures
-			GameObject[] buttons = GameObject.FindGameObjectsWithTag ("Button");
+			GameObject[] buttons = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_BUTTON);
 			foreach (GameObject button in buttons)
 				gestureManager.AddAndSubscribeToGestures (button);
 
 			// sound out word
-			GameObject[] tar = GameObject.FindGameObjectsWithTag("TargetBlank");
+			GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_BLANK);
 			GameObject audioManager = GameObject.Find ("AudioManager");
 			audioManager.GetComponent<AudioManager>().SpellOutWord(tar);
 
 			// start pulsing movable letters
-			GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 			foreach (GameObject go in mov) {
 				go.GetComponent<PulseBehavior> ().StartPulsing (go, (tar.Length+1) * AudioManager.clipLength);
 			}
@@ -68,7 +68,7 @@ namespace WordTree
 		public static void SpellOutWord()
 		{
 			// find blanks
-			GameObject[] tar = GameObject.FindGameObjectsWithTag("TargetBlank");
+			GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_BLANK);
 
 			// create array to hold letters found
 			GameObject[] mov = new GameObject[tar.Length];
@@ -121,7 +121,7 @@ namespace WordTree
 
 			float time = .3f; // time to complete one pulse
 
-			GameObject go = GameObject.FindGameObjectWithTag ("WordObject");
+			GameObject go = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_WORD_OBJECT);
 
 			// grow and shirnk object a few times
 			Debug.Log ("Pulsing " + go.name);

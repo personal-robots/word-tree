@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\BlankCreation.cs" />
      <Compile Include="Assets\Scripts\ChooseObjectDirector.cs" />
      <Compile Include="Assets\Scripts\CollisionManager.cs" />
+     <Compile Include="Assets\Scripts\Constants.cs" />
      <Compile Include="Assets\Scripts\GestureManager.cs" />
      <Compile Include="Assets\Scripts\IntroDirector.cs" />
      <Compile Include="Assets\Scripts\LearnSpellingDirector.cs" />

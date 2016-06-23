@@ -10,7 +10,7 @@ namespace WordTree
 		 // called on start, initialize stuff
 		void Start () {
 			//create instance of grestureManager
-			GestureManager gestureManager = GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+			GestureManager gestureManager = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			// add all levels onto level list
 			ProgressManager.InitiateLevelList ();
@@ -50,7 +50,7 @@ namespace WordTree
 			LeanTween.moveZ (Lock, -2f, .01f);
 
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("LevelIcon");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
 			foreach (GameObject go in gos) {
 
 				// if level is not unlocked yet, make level icon disappear
@@ -112,7 +112,7 @@ namespace WordTree
 		void GrowKid()
 		{
 			float scale = .5f; // scale to grow kid to
-			GameObject kid = GameObject.FindGameObjectWithTag ("Kid"); 
+			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID); 
 
 			// grow kid to specified size
 			LeanTween.scale (kid, new Vector3 (scale, scale, 1f), 1f);

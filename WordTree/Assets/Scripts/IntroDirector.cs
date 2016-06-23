@@ -10,10 +10,10 @@ namespace WordTree
 			// Called on start, used to initialize stuff
 		void Start () {
 		//create instance of grestureManager
-		 GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			// find kid
-			GameObject[] kids = GameObject.FindGameObjectsWithTag ("Kid");
+			GameObject[] kids = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_KID);
 
 			foreach (GameObject kid in kids) {
 				// start pulsing kid

@@ -183,7 +183,7 @@ namespace WordTree
 		public static void UnlockAllLevels()
 		{
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("LevelIcon");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
 
 			foreach (GameObject go in gos) {
 				// make level icon appear
@@ -207,7 +207,7 @@ namespace WordTree
 		public static void RelockLevels()
 		{
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("LevelIcon");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
 
 			foreach (GameObject go in gos) {
 				// if level hasn't been unlocked yet

@@ -18,23 +18,22 @@ namespace WordTree
 
 		 
 
+		private Rect cameraRect;
 
 
-		
 		//creates rectangle to limit where objects can go on the screen
-		public  Rect Start(){
+		public  void Start(){
 			Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
 			Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
 				Camera.main.pixelHeight));
-			Rect cameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
-			return cameraRect;
+			this.cameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 
 	
 		}
 		// subscribes an object to all relevant gestures, according to its tag
 		public void AddAndSubscribeToGestures (GameObject go)
 		{
-			if (go.tag == "LevelIcon" || go.tag == "WordObject" || go.tag == "Button" || go.tag == "Kid" || go.tag == "Lock") {
+			if (go.tag == Constants.Tags.TAG_LEVEL_ICON || go.tag == Constants.Tags.TAG_WORD_OBJECT|| go.tag == Constants.Tags.TAG_BUTTON || go.tag == Constants.Tags.TAG_KID || go.tag == Constants.Tags.TAG_LOCK) {
 				// add tap gesture component
 				TapGesture tg = go.AddComponent<TapGesture> ();
 				// subscribe to tap events
@@ -42,7 +41,7 @@ namespace WordTree
 				Debug.Log (go.name + " subscribed to tap events");
 			}
 
-			if (go.tag == "MovableLetter" || go.tag == "MovableBlank") {
+			if (go.tag == Constants.Tags.TAG_MOVABLE_LETTER || go.tag == Constants.Tags.TAG_MOVABLE_BLANK) {
 				// add pan gesture component
 				TransformGesture pg = go.AddComponent<TransformGesture> ();
 				pg.CombineTouchesInterval = 0.2f;
@@ -69,7 +68,7 @@ namespace WordTree
 
 			}
 
-			if (go.tag == "TargetLetter" || go.tag == "TargetBlank") {
+			if (go.tag == Constants.Tags.TAG_TARGET_LETTER || go.tag == Constants.Tags.TAG_TARGET_BLANK) {
 				// add press gesture component
 				PressGesture prg = go.AddComponent<PressGesture> ();
 				// subscribe to press events
@@ -174,7 +173,7 @@ namespace WordTree
 			}
 
 			// if a levelIcon is tapped on - make kid "shrink into" the levelIcon 
-			if (go.tag == "LevelIcon") {
+			if (go.tag == Constants.Tags.TAG_LEVEL_ICON) {
 				ShrinkKid(new Vector3(go.transform.position.x, go.transform.position.y, -2));
 
 				// keep track of what level Icon was tapped: stores the name of the current level
@@ -198,7 +197,7 @@ namespace WordTree
 				ProgressManager.currentMode = 3;
 
 			// if a word object is tapped on in the Choose Object scene, load the appropriate scene
-			if (go.tag == "WordObject" && Application.loadedLevelName == "3. Choose Object") {
+			if (go.tag == Constants.Tags.TAG_WORD_OBJECT && Application.loadedLevelName == "3. Choose Object") {
 				// if the mode is 1, go to Learn Spelling scene
 				if (ProgressManager.currentMode == 1)
 					Application.LoadLevel ("4. Learn Spelling");
@@ -213,7 +212,7 @@ namespace WordTree
 			}
 
 			// play word's sound when tapped
-			if (go.tag == "WordObject" && Application.loadedLevelName != "3. Choose Object")
+			if (go.tag == Constants.Tags.TAG_WORD_OBJECT && Application.loadedLevelName != "3. Choose Object")
 				go.GetComponent<AudioSource>().Play ();
 
 			// if home button is tapped, go back to the intro scene
@@ -280,7 +279,7 @@ namespace WordTree
 
 			// if any button is tapped, darken the button briefly to indicate to user that 
 			// tap gesture has been registered
-			if (go.tag == "Button") {
+			if (go.tag == Constants.Tags.TAG_BUTTON) {
 				LeanTween.color (go, Color.grey, .01f);
 				LeanTween.color (go, Color.white, .01f).setDelay (.2f);
 			}
@@ -390,7 +389,7 @@ namespace WordTree
 		// Play animation for kid spiraling into level icon with sound ("Whee!")
 		void ShrinkKid(Vector3 posn)
 		{
-			GameObject kid = GameObject.FindGameObjectWithTag ("Kid");
+			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID);
 
 			// Rotate kid 360 degrees
 			LeanTween.rotateAround (kid, Vector3.forward, 360f, 1f);
@@ -448,10 +447,9 @@ namespace WordTree
 		
 			//changes transform.position of most recently hit gameObject
 			//restricits the position of gameObject to rectangle
-			Rect cameraRect;
-			cameraRect = Start ();
-			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, cameraRect.xMin, cameraRect.xMax),
-				Mathf.Clamp (transform.position.y, cameraRect.yMin, cameraRect.yMax), transform.position.z);
+
+			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, this.cameraRect.xMin, this.cameraRect.xMax),
+				Mathf.Clamp (transform.position.y, this.cameraRect.yMin, this.cameraRect.yMax), transform.position.z);
 		}
 
 		

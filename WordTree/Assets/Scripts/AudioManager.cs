@@ -49,7 +49,7 @@ namespace WordTree
 		void PlaySoundAndPulseWord(GameObject[] gos)
 		{	
 			//Check if word object has audio clip attached
-			GameObject go = GameObject.FindGameObjectWithTag ("WordObject");
+			GameObject go = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_WORD_OBJECT);
 			if (go.GetComponent<AudioSource>() != null && go.GetComponent<AudioSource>().clip != null) {
 				Debug.Log ("Playing clip for " + go.name);
 				//Wait for previous letters to complete before playing audio clip
@@ -68,7 +68,7 @@ namespace WordTree
 			yield return new WaitForSeconds (delayTime);
 
 			//if object is a letter
-			if (go.tag == "TargetLetter" || go.tag == "MovableLetter") {
+			if (go.tag == Constants.Tags.TAG_TARGET_LETTER || go.tag == Constants.Tags.TAG_MOVABLE_LETTER) {
 				// scale up letter
 				LeanTween.scale (go, new Vector3 (scaleUp * WordCreation.letterScale, scaleUp * WordCreation.letterScale, 1), pulseLength).setDelay (.2f);
 				// then scale down letter back to original size
@@ -76,7 +76,7 @@ namespace WordTree
 			}
 
 			//if object is a blank
-			if (go.tag == "TargetBlank") {
+			if (go.tag == Constants.Tags.TAG_TARGET_BLANK) {
 				//Set desired initial (default) scale of blank
 				float xScale = .7f; // horizontal scale of blank
 				float yScale = 1.5f; // vertical scale of blank
@@ -97,7 +97,7 @@ namespace WordTree
 			yield return new WaitForSeconds (delayTime);
 
 			//if object is a letter
-			if (gos [0].tag == "TargetLetter" || gos [0].tag == "MovableLetter") {
+			if (gos [0].tag == Constants.Tags.TAG_TARGET_LETTER  || gos [0].tag ==Constants.Tags.TAG_MOVABLE_LETTER ) {
 				for (int i=0; i < gos.Length; i++) {
 					// scale up letter
 					LeanTween.scale (gos [i], new Vector3 (scaleUp * WordCreation.letterScale, scaleUp * WordCreation.letterScale, 1), pulseLength).setDelay(.2f);
@@ -107,7 +107,7 @@ namespace WordTree
 			}
 
 			//if object is a blank
-			if (gos [0].tag == "TargetBlank") {
+			if (gos [0].tag == Constants.Tags.TAG_TARGET_BLANK) {
 				//Set desired initial (default) scale of blank
 				float xScale = .7f; // horizontal scale of blank
 				float yScale = 1.5f; // vertical scale of blank

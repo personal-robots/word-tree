@@ -116,9 +116,9 @@ namespace WordTree{
 				y = 0;
 
 			//Set z position
-			if (tag == "MovableBlank")
+			if (tag == Constants.Tags.TAG_MOVABLE_BLANK)
 				z = -2; // if draggable, set in front
-			if (tag == "TargetBlank")
+			if (tag == Constants.Tags.TAG_TARGET_BLANK)
 				z = 0;  // if static, set in back
 
 

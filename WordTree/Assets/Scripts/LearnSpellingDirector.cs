@@ -10,18 +10,18 @@ namespace WordTree
 		// called on start, initialize stuff
 		void Start () {
 			//create instance of grestureManager
-			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			// create two sets of words - movable and target
 			LoadSpellingLesson (ProgressManager.currentWord);
 
 			// subscribe buttons to gestures
-			GameObject[] buttons = GameObject.FindGameObjectsWithTag ("Button");
+			GameObject[] buttons = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_BUTTON);
 			foreach (GameObject button in buttons)
 				gestureManager.AddAndSubscribeToGestures (button);
 
 			// play word's sound
-			GameObject word = GameObject.FindGameObjectWithTag ("WordObject");
+			GameObject word = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_WORD_OBJECT);
 			word.GetComponent<AudioSource>().Play();
 
 			// start pulsing movable letters
@@ -69,7 +69,7 @@ namespace WordTree
 			yield return new WaitForSeconds (delayTime);
 
 			// find movable letters
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 
 			Vector3[] posn = new Vector3[gos.Length]; // contains desired position to move each letter to
 			Vector3[] shuffledPosn = new Vector3[gos.Length]; // contains the new positions after being shuffled
@@ -142,7 +142,7 @@ namespace WordTree
 			yield return new WaitForSeconds (delayTime);
 
 			// find target letters
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("TargetLetter"); 
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_TARGET_LETTER); 
 			foreach (GameObject go in gos)
 				// add collision manager so we can get trigger enter events
 				go.AddComponent<CollisionManager> ();
@@ -156,7 +156,7 @@ namespace WordTree
 			yield return new WaitForSeconds (delayTime);
 
 			// start pulsing letters
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 			foreach (GameObject go in gos) {
 				go.GetComponent<PulseBehavior> ().StartPulsing (go);
 			}
@@ -169,7 +169,7 @@ namespace WordTree
 			 
 			float time = 1f; // time to complete animation
 
-			GameObject go = GameObject.FindGameObjectWithTag ("WordObject");
+			GameObject go = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_WORD_OBJECT);
 
 			Debug.Log ("Spinning " + go.name);
 
@@ -183,7 +183,7 @@ namespace WordTree
 			LeanTween.moveY (go, 1.5f, time).setDelay (delayTime);
 
 			// move target letters down
-			GameObject[] tar = GameObject.FindGameObjectsWithTag ("TargetLetter");
+			GameObject[] tar = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_TARGET_LETTER);
 			foreach (GameObject letter in tar)
 				LeanTween.moveY (letter,-3f,time).setDelay(delayTime);
 

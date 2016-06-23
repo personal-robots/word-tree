@@ -86,14 +86,14 @@ namespace WordTree
 				audioSource.playOnAwake = false;
 			}
 
-			if (go.tag != "TargetLetter" && go.tag != "TargetBlank" && go.tag != "Jar") 
+			if (go.tag != Constants.Tags.TAG_TARGET_LETTER && go.tag != Constants.Tags.TAG_TARGET_BLANK && go.tag != Constants.Tags.TAG_JAR) 
 			{
 				// add polygon collider that matches shape of object
 				// used to detect touches and collisions
 				go.AddComponent<PolygonCollider2D> ();
 			}
 
-			if (go.tag == "TargetLetter" || go.tag == "TargetBlank")
+			if (go.tag == Constants.Tags.TAG_TARGET_LETTER || go.tag == Constants.Tags.TAG_TARGET_BLANK)
 			{
 				// add circle collider
 				// used to detect touches and collisions
@@ -105,17 +105,17 @@ namespace WordTree
 				// set radius for circle collider
 				// want radius to be small, to make it easier for users to drag letters or sound blanks to where they want
 				// without accidentally colliding with another object
-				if (go.tag == "TargetLetter"){
+				if (go.tag == Constants.Tags.TAG_TARGET_LETTER){
 					if (ProgressManager.currentMode == 1)
 						cc2d.radius = .1f;
 					if (ProgressManager.currentMode == 3)
 						cc2d.radius = 3f;
 				}
-				if (go.tag == "TargetBlank")
+				if (go.tag == Constants.Tags.TAG_TARGET_BLANK)
 					cc2d.radius = .3f;
 			}
 
-			if (go.tag == "Jar") {
+			if (go.tag == Constants.Tags.TAG_JAR) {
 				// add circle collider
 				// used to detect collisions
 				CircleCollider2D cc2d = go.AddComponent<CircleCollider2D> ();
@@ -126,7 +126,7 @@ namespace WordTree
 				cc2d.radius = .5f;
 			}
 			
-			if (go.tag == "MovableLetter" || go.tag == "MovableBlank")
+			if (go.tag == Constants.Tags.TAG_MOVABLE_LETTER || go.tag == Constants.Tags.TAG_MOVABLE_BLANK)
 			{
 				// add rigidbody if object is draggable
 				Rigidbody2D rb2d = go.AddComponent<Rigidbody2D>();
@@ -147,7 +147,7 @@ namespace WordTree
 			go.AddComponent<PulseBehavior> ();
 
 
-			if (go.tag == "Hint") 
+			if (go.tag == Constants.Tags.TAG_HINT) 
 			{
 				// set hint letter color to black
 				go.GetComponent<SpriteRenderer>().color = Color.black;

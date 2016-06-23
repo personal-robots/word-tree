@@ -10,13 +10,13 @@ namespace WordTree
 		//Called on start, used to initialize stuff
 		void Start () {
 			//create instance of grestureManager
-			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			//Create objects and background
 			LoadLevel (ProgressManager.currentLevel);
 
 			//Set up kid
-			GameObject kid = GameObject.FindGameObjectWithTag ("Kid");
+			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID);
 			kid.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Graphics/" + ProgressManager.chosenKid);
 
 			//Play Grow Animation for kid
@@ -99,7 +99,7 @@ namespace WordTree
 		void GrowKid()
 		{
 			float scale = .5f; //desired scale to grow kid to
-			GameObject kid = GameObject.FindGameObjectWithTag ("Kid");
+			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID);
 			//Scale up kid to desired size
 			LeanTween.scale (kid, new Vector3 (scale, scale, 1f), 1f);
 		}
@@ -125,7 +125,7 @@ namespace WordTree
 			int numCompleted = 0; //counter for number of words completed in the scene
 
 			//Find word objects
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("WordObject");
+			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_WORD_OBJECT);
 			foreach (GameObject go in gos) {
 				//if current scene is Learn Spelling
 				if (ProgressManager.currentMode == 1){

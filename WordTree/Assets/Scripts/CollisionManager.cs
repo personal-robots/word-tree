@@ -50,7 +50,7 @@ namespace WordTree
 					if (CheckCompletedWord ()) {
 
 						// sound out the word
-						GameObject[] tar = GameObject.FindGameObjectsWithTag("TargetLetter");
+						GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_LETTER);
 						GameObject audioManager = GameObject.Find ("AudioManager");
 						audioManager.GetComponent<AudioManager>().SpellOutWord(tar);
 
@@ -99,7 +99,7 @@ namespace WordTree
 					if (CheckCorrectSpelling("TargetBlank")){
 
 						// find all movable letters
-						GameObject[] mov = GameObject.FindGameObjectsWithTag("MovableLetter");
+						GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
 
 						// disable touch gestures for sound & hint buttons
 						GameObject.Find ("SoundButton").GetComponent<GestureManager>().DisableGestures(GameObject.Find ("SoundButton"));
@@ -132,7 +132,7 @@ namespace WordTree
 						ResetIncorrectLetters(1f);
 
 						// play word's sound
-						GameObject.FindGameObjectWithTag("WordObject").GetComponent<AudioSource>().PlayDelayed (1f);
+						GameObject.FindGameObjectWithTag(Constants.Tags.TAG_WORD_OBJECT).GetComponent<AudioSource>().PlayDelayed (1f);
 
 						// flash hint button to call attention to it
 						FlashHintButton (2f);
@@ -180,7 +180,7 @@ namespace WordTree
 					if (CheckCorrectSpelling ("TargetLetter")) {
 
 						// find all sound blanks
-						GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableBlank");
+						GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_BLANK);
 
 						// disable touch gestures for sound + hint buttons
 						GameObject.Find ("SoundButton").GetComponent<GestureManager> ().DisableGestures (GameObject.Find ("SoundButton"));
@@ -190,7 +190,7 @@ namespace WordTree
 						MarkCorrectSounds (0f);
 
 						// sound out word
-						GameObject[] tar = GameObject.FindGameObjectsWithTag("TargetLetter");
+						GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_LETTER);
 						GameObject audioManager = GameObject.Find ("AudioManager");
 						audioManager.GetComponent<AudioManager>().SpellOutWord(tar);
 
@@ -215,7 +215,7 @@ namespace WordTree
 						ResetIncorrectSounds (1f);
 
 						// play word's sound 
-						GameObject.FindGameObjectWithTag("WordObject").GetComponent<AudioSource>().PlayDelayed (1f);
+						GameObject.FindGameObjectWithTag(Constants.Tags.TAG_WORD_OBJECT).GetComponent<AudioSource>().PlayDelayed (1f);
 
 						// flash hint button to call attention to it
 						FlashHintButton (2f);
@@ -241,11 +241,11 @@ namespace WordTree
 			// set parameters for Physics2D.OverlapCircleAll function 
 			// z = z-position of movable object to search for
 			// radius = distance around target object to search
-			if (tag == "TargetBlank") {
+			if (tag == Constants.Tags.TAG_TARGET_BLANK) {
 				z = -1;
 				radius = .5f;
 			}
-			if (tag == "TargetLetter") {
+			if (tag == Constants.Tags.TAG_TARGET_LETTER) {
 				z = 1;
 				radius = 1.5f;
 			}
@@ -280,11 +280,11 @@ namespace WordTree
 			// set parameters for Physics2D.OverlapCircleAll function
 			// z = z-position of movable object to search for
 			// radius = distance around target object to search
-			if (tag == "TargetBlank") {
+			if (tag == Constants.Tags.TAG_TARGET_BLANK) {
 				z = -1;
 				radius = .7f;
 			}
-			if (tag == "TargetLetter") {
+			if (tag == Constants.Tags.TAG_TARGET_LETTER) {
 				z = 1;
 				radius = 1.5f;
 			}
@@ -502,7 +502,7 @@ namespace WordTree
 		public static void ShowSoundHint()
 		{
 			// find movable sound blanks
-			GameObject[] mov = GameObject.FindGameObjectsWithTag("MovableBlank");
+			GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_BLANK);
 
 			// loop through sound blanks
 			foreach (GameObject go in mov) {
@@ -623,7 +623,7 @@ namespace WordTree
 		bool CheckCompletedWord ()
 		{
 			// find all movable letters
-			GameObject[] mov = GameObject.FindGameObjectsWithTag ("MovableLetter");
+			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 			Debug.Log ("Letters left: " + (mov.Length-1));
 
 			// if word is completed should only find 1 movable letter
