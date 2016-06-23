@@ -144,7 +144,7 @@ namespace WordTree
 			// find target letters
 			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_TARGET_LETTER); 
 			foreach (GameObject go in gos)
-				// add collision manager so we can get trigger enter events
+				 //add collisionmanager so we can get trigger enter events
 				go.AddComponent<CollisionManager> ();
 			Debug.Log ("Enabled Collisions");
 		}
@@ -206,6 +206,6 @@ namespace WordTree
 
 		}
 
-
+	
 	}
 }

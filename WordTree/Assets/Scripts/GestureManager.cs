@@ -13,16 +13,17 @@ namespace WordTree
 	
 	public class GestureManager : MonoBehaviour {
 		   
-		// store camera parameters for adjusting screen size
-		//convert camera parameters to world view for calculations
+
 
 		 
-
+		//create rectangle for screen boundaries
 		private Rect cameraRect;
 
 
 		//creates rectangle to limit where objects can go on the screen
 		public  void Start(){
+			// store camera parameters for adjusting screen size
+			//convert camera parameters to world view for calculations
 			Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
 			Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
 				Camera.main.pixelHeight));
@@ -243,7 +244,7 @@ namespace WordTree
 				if (Application.loadedLevelName == "6. Sound Game")
 					CollisionManager.ShowSoundHint ();
 			}
-			//create instance of GestureManager
+			//reference to existing component of gestureManager
 			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// if the closed lock icon is tapped, unlock all levels of the word tree
@@ -253,12 +254,12 @@ namespace WordTree
 
 				// move closed lock icon to behind the background and disable touch gestures
 				LeanTween.moveZ (go, 3f, .01f);
-				gestureManager.DisableGestures(go);
+				this.DisableGestures(go);
 
 				// move open lock icon in front of background and subscribe to touch gestures
 				GameObject lockOpen = GameObject.Find ("LockOpen");
 				LeanTween.moveZ (lockOpen,-2f,.01f);
-				gestureManager.AddAndSubscribeToGestures(lockOpen);
+				this.AddAndSubscribeToGestures(lockOpen);
 
 			}
 
@@ -269,12 +270,12 @@ namespace WordTree
 
 				// move open lock icon to behind background and disable touch gestures
 				LeanTween.moveZ (go, 3f, .01f);
-				gestureManager.DisableGestures(go);
+				this.DisableGestures(go);
 
 				// move closed lock icon in front of background and subscribe to touch gestures
 				GameObject lockClosed = GameObject.Find ("LockClosed");
 				LeanTween.moveZ (lockClosed,-2f,.01f);
-				gestureManager.AddAndSubscribeToGestures(lockClosed);
+				this.AddAndSubscribeToGestures(lockClosed);
 			}
 
 			// if any button is tapped, darken the button briefly to indicate to user that 

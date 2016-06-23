@@ -8,6 +8,7 @@ namespace WordTree
 {
 	public class ChooseObjectDirector : MonoBehaviour { 
 		//Called on start, used to initialize stuff
+		private GestureManager gestureManager;
 		void Start () {
 			//create instance of grestureManager
 			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();

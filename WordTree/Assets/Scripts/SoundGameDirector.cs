@@ -8,7 +8,7 @@ namespace WordTree
 	public class SoundGameDirector : MonoBehaviour {
 		// called on start
 		void Start () {
-		//create instance of grestureManager
+		//make reference to existing gestureManager 
 			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			// create sound blanks, letters, and word object

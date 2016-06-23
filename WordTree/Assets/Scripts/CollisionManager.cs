@@ -11,10 +11,16 @@ using System.Linq;
 
 namespace WordTree
 {
+	
 	public class CollisionManager : MonoBehaviour {
-
+		//make reference to existing gestureManager 
+		GestureManager gestureManager;
 		// Called when an object enters the collider of another object
 		// Set the target object as the trigger
+		void Start(){
+			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
+
+		}
 		void OnTriggerEnter2D (Collider2D other)
 		{
 
@@ -71,7 +77,7 @@ namespace WordTree
 				Debug.Log ("Collision on " + other.name);
 
 				// disable touch gestures for letter
-				other.gameObject.GetComponent<GestureManager>().DisableGestures(other.gameObject);
+				gestureManager.DisableGestures(other.gameObject);
 
 				// stop pulsing letter
 				other.gameObject.GetComponent<PulseBehavior>().StopPulsing (other.gameObject);
