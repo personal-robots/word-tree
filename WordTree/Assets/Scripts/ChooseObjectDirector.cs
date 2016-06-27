@@ -7,8 +7,9 @@ using System.Collections;
 namespace WordTree
 {
 	public class ChooseObjectDirector : MonoBehaviour { 
-		//Called on start, used to initialize stuff
+		
 		private GestureManager gestureManager;
+		//Called on start, used to initialize stuff
 		void Start () {
 			//create instance of grestureManager
 			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
@@ -187,6 +188,7 @@ namespace WordTree
 			//Get properties of the level, including the words included in the level, the position of the background image, 
 			// and the desired scale of the background image
 			LevelProperties prop = LevelProperties.GetLevelProperties (level);
+			Debug.Log (prop);
 			string[] words = prop.Words ();
 			Vector3 backgroundPosn = prop.BackgroundPosn ();
 			float backgroundScale = prop.BackgroundScale ();

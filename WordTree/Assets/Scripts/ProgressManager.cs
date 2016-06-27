@@ -32,7 +32,7 @@ namespace WordTree
 
 		// set order that levels will be unlocked
 		public static string SetLevelOrder(int index)
-		{
+		{Debug.Log (index);
 			if (index == 1)
 				return "Animals";
 			if (index == 2)
@@ -207,7 +207,7 @@ namespace WordTree
 		public static void RelockLevels()
 		{
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("LevelIcon");
 
 			foreach (GameObject go in gos) {
 				// if level hasn't been unlocked yet

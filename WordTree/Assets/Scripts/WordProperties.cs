@@ -33,7 +33,7 @@ namespace WordTree
 		// Create an instance of WordProperties with the desired properties set
 		static WordProperties CreateInstance(string[] phonemes, float objScale)
 		{
-			WordProperties prop = ScriptableObject.CreateInstance<WordProperties> ();
+			WordProperties prop = WordProperties.CreateInstance<WordProperties> ();
 			prop.Init (phonemes, objScale);
 			return prop;
 		}
@@ -42,7 +42,7 @@ namespace WordTree
 		// Get properties of a word
 		// info for all words stored here, so we can access when instantiating a word
 		public static WordProperties GetWordProperties(string word)
-		{
+		{//Debug.Log (word);
 			switch (word) 
 			{
 			
@@ -312,7 +312,7 @@ namespace WordTree
 
 			default:
 
-				return null;
+				return CreateInstance(new string[] {"T","E-short","N-end","T"}, .9f);
 
 			}
 		}

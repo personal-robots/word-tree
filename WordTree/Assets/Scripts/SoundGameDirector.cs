@@ -6,10 +6,14 @@ using System.Collections;
 namespace WordTree
 {
 	public class SoundGameDirector : MonoBehaviour {
+		
+
+		//private GestureManager gestureManager;
 		// called on start
 		void Start () {
 		//make reference to existing gestureManager 
-			GestureManager gestureManager =GameObject.FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
+			GestureManager gestureManager = GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
+
 
 			// create sound blanks, letters, and word object
 			LoadSoundGameWord (ProgressManager.currentWord);
@@ -18,7 +22,6 @@ namespace WordTree
 			GameObject[] buttons = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_BUTTON);
 			foreach (GameObject button in buttons)
 				gestureManager.AddAndSubscribeToGestures (button);
-
 			// sound out word
 			GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_LETTER);
 			GameObject audioManager = GameObject.Find ("AudioManager");

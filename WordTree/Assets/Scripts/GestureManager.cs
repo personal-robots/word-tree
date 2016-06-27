@@ -244,8 +244,6 @@ namespace WordTree
 				if (Application.loadedLevelName == "6. Sound Game")
 					CollisionManager.ShowSoundHint ();
 			}
-			//reference to existing component of gestureManager
-			GestureManager gestureManager =GameObject.FindGameObjectWithTag("GestureManager").GetComponent<GestureManager> ();
 
 			// if the closed lock icon is tapped, unlock all levels of the word tree
 			if (go.name == "LockClosed") {
@@ -324,7 +322,7 @@ namespace WordTree
 
 		// Handles release events
 		private void releasedHandler (object sender, EventArgs e)
-		{
+	{
 			Debug.Log ("PRESS COMPLETE");
 
 		}
@@ -363,7 +361,7 @@ namespace WordTree
 
 				// move the object with the drag
 				//sets position of most recently touched game object
-				gesture.gameObject.transform.position = new Vector3(hit.Point.x,hit.Point.y,-2);
+				//gesture.gameObject.transform.position = new Vector3(hit.Point.x,hit.Point.y,-2);
 
 				// TODO make sure the object being dragged can't fly off the screen
 

@@ -49,7 +49,7 @@ namespace WordTree
 		// Get properties of the level
 		// info for all levels stored here, so we can access when instantiating a level
 		public static LevelProperties GetLevelProperties(string level)
-		{
+		{Debug.Log (level);
 			switch (level) 
 			{
 
@@ -103,9 +103,8 @@ namespace WordTree
 
 			default:
 
+				Debug.Log ("Words not processed");
 				return null;
-
-
 			}
 	
 		}

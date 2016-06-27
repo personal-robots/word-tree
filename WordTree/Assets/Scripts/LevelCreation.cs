@@ -35,12 +35,13 @@ namespace WordTree
 			}
 
 			for (int i=0; i<objects.Length; i++) {
-				// Get appropriate scale for the object (info stored in WordProperties script)
+				 //Get appropriate scale for the object (info stored in WordProperties script)
 				scale[i] = WordProperties.GetWordProperties(objects[i]).ObjScale();
 
 				// Instantiate word object, according to the given input
 				ObjectProperties obj = ObjectProperties.CreateInstance (objects [i], "WordObject", position [i], new Vector3 (scale [i], scale [i], 1), level + "/" + objects [i], "Words/" + objects [i]);
 				ObjectProperties.InstantiateObject (obj);
+
 			}
 
 
