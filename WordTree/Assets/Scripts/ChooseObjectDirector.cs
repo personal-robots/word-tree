@@ -25,7 +25,8 @@ namespace WordTree
 			kid.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/KidSpeaking/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
 			if (kid.GetComponent<AudioSource>().clip != null) {
-				kid.GetComponent<AudioSource>().priority = 255;
+				kid.GetComponent<AudioSource> ().volume = 1.0f;
+				kid.GetComponent<AudioSource>().priority = 0;
 				//Play audio clip attached to kid if there is one
 				kid.GetComponent<AudioSource>().Play ();
 			}
@@ -36,7 +37,8 @@ namespace WordTree
 			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
 			if (dir.GetComponent<AudioSource>().clip != null) {
-				dir.GetComponent<AudioSource>().volume = .7f;
+				dir.GetComponent<AudioSource>().volume = .1f;
+				dir.GetComponent<AudioSource> ().priority = 255;
 				//Start playing background music if attached
 				dir.GetComponent<AudioSource>().Play ();
 			}

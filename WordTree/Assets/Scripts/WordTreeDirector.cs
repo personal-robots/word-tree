@@ -31,6 +31,7 @@ namespace WordTree
 
 			// play background music if attached to director
 			if (dir.GetComponent<AudioSource>().clip != null)
+				dir.GetComponent<AudioSource>().volume = .7f;
 				dir.GetComponent<AudioSource>().Play ();
 
 			// subscribe home button to gestures
