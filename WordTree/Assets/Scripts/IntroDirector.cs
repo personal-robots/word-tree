@@ -29,6 +29,7 @@ namespace WordTree
 			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/WordTree") as AudioClip;
 			// play background music if attached
 			if (dir.GetComponent<AudioSource>().clip != null)
+				dir.GetComponent<AudioSource>().volume = .25f;
 				dir.GetComponent<AudioSource>().Play ();
 
 			ProgressManager.lockStatus = "";
@@ -44,10 +45,12 @@ namespace WordTree
 			if (!dir.GetComponent<AudioSource>().isPlaying)
 				dir.GetComponent<AudioSource>().Play ();
 			// if user presses escape or 'back' button on android, exit program
+
 			if (Input.GetKeyDown (KeyCode.Escape))
 				Application.Quit ();
 			
 
+ 
 		}
 	
 

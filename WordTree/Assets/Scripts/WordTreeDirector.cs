@@ -31,6 +31,7 @@ namespace WordTree
 
 			// play background music if attached to director
 			if (dir.GetComponent<AudioSource>().clip != null)
+				dir.GetComponent<AudioSource>().volume = .7f;
 				dir.GetComponent<AudioSource>().Play ();
 
 			// subscribe home button to gestures
@@ -98,8 +99,11 @@ namespace WordTree
 			if (!dir.GetComponent<AudioSource>().isPlaying)
 				dir.GetComponent<AudioSource>().Play ();
 			// if user presses escape or 'back' button on android, exit program
-			if (Input.GetKeyDown (KeyCode.Escape))
-				Application.Quit ();
+
+
+			if(Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
+
 			
 		}
 
