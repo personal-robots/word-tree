@@ -337,6 +337,16 @@ namespace WordTree
 			}
 
 		}
+		void Update(){
+
+			//changes transform.position of most recently hit gameObject
+			//restricits the position of gameObject to rectangle
+
+			transform.position = new Vector3 (Mathf.Clamp 
+				(transform.position.x, this.cameraRect.xMin, this.cameraRect.xMax),
+				Mathf.Clamp (transform.position.y, this.cameraRect.yMin, 
+					this.cameraRect.yMax), transform.position.z);
+		}
 
 		// Handle pan / drag events
 		private void pannedHandler (object sender, EventArgs e)
@@ -429,16 +439,7 @@ namespace WordTree
 				Debug.Log ("No clip found for " + go.name);
 			}
 		}
-			void Update(){
-
-				//changes transform.position of most recently hit gameObject
-				//restricits the position of gameObject to rectangle
-
-				transform.position = new Vector3 (Mathf.Clamp 
-					(transform.position.x, this.cameraRect.xMin, this.cameraRect.xMax),
-					Mathf.Clamp (transform.position.y, this.cameraRect.yMin, 
-						this.cameraRect.yMax), transform.position.z);
-			}
+			
 		}
 
 
