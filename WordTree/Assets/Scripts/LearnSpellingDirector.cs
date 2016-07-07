@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 // Main game controller for "Learn Spelling" scene.
 // Creates two sets of words, handles word explosion and animations
@@ -7,7 +9,8 @@ using System.Collections;
 namespace WordTree
 {
 	public class LearnSpellingDirector : MonoBehaviour {
-
+		private List<Vector3> usedPos;
+		private Rect rect_but;
 		// called on start, initialize stuff
 		void Start () {
 			//create instance of grestureManager
@@ -33,6 +36,7 @@ namespace WordTree
 
 			// then enable collisions to occur
 			StartCoroutine (EnableCollisions(2));
+
 
 		}
 
@@ -66,46 +70,82 @@ namespace WordTree
 		// currently handles words with 3-5 letters
 		IEnumerator ExplodeWord(float delayTime)
 		{
+			//List of possible locations for letters to go
+			List<Vector3> points= new List<Vector3>(); 
+			//List of numbers for regions 
+			List<int> points_ind= new List<int>(new int[] {1,2,3,4,5});
+			//Temporary list of numbers for use in for loop
+			List<int> points_ind_temp= new List<int>(); 
+
+
 			// wait for scene to load before exploding
 			yield return new WaitForSeconds (delayTime);
-
+			System.Random rnd = new System.Random();
 			// find movable letters
 			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
 
 			Vector3[] posn = new Vector3[gos.Length]; // contains desired position to move each letter to
 			Vector3[] shuffledPosn = new Vector3[gos.Length]; // contains the new positions after being shuffled
+			//Possible regions where letter can move
+			points.Add( new Vector3(-10,4,0)); 
+			points.Add(new Vector3 (-10, -3,0));
+			points.Add (new Vector3 (-6, 0,0));
+			points.Add(new Vector3 (4, 3, 0));
+			points.Add(new Vector3 (8, 0, 0));
 
-			int y1 = 3; // y-position
-			int y2 = 2; // y-position
-			int z = -2; // z-position
+							
 
-			// set final positions for letters after explosion
-			if (gos.Length == 3) {
+				//Random rnd = new Random();
+				if (gos.Length == 3) {
+					for (int i= 0; i<3; i++){
+					//Want to go through loop three times for three letters
+					int index = rnd.Next(0,4-i);
+					//Want random index between 0 and 4 
+					//to get a number from the list of point names
+					points_ind_temp.Add(points_ind[index]);
+					//Add point to temporary list
+					points_ind.RemoveAt(index);
+					//Remove point so it is not used again 
+				}	//Set vectors equal to an index on temporary list
+				//which contains values from 0-4 
+				//and then use that value for choosing an index from the original points list
+					posn = new Vector3[3] {
+						points[points_ind_temp[0]],
+						points[points_ind_temp[1]],
+					points[points_ind_temp[2]]
+					};
 
-				posn = new Vector3[3] {
-					new Vector3 (-6, 0, z),
-					new Vector3 (5, y2, z),
-					new Vector3 (7, -y1, z)
-				};
-			}
-			if (gos.Length == 4) {
-
-				posn = new Vector3[4] {
-					new Vector3 (-7, -y1, z),
-					new Vector3 (-5, y2, z),
-					new Vector3 (5, y2, z),
-					new Vector3 (7, -y1, z)
-				};
-			}
-			if (gos.Length == 5) {
-
-				posn = new Vector3[5] {
-					new Vector3 (-7, -y2, z),
-					new Vector3 (-5, y2, z),
-					new Vector3 (4, y1, z),
-					new Vector3 (8, 0, z),
-					new Vector3 (7, -y1, z)
-				};
+				}
+	
+					
+				
+				
+				if (gos.Length == 4) {
+				for (int i = 0; i < 4; i++) {
+					int index = rnd.Next (0, 4 - i);
+					points_ind_temp.Add (points_ind [index]);
+					points_ind.RemoveAt (index);
+				}
+					posn = new Vector3[4] {
+					points[points_ind_temp[0]],
+					points[points_ind_temp[1]],
+					points[points_ind_temp[2]],
+					points[points_ind_temp[3]]
+					};
+				}
+				if (gos.Length == 5) {
+				for (int i = 0; i < 5; i++) {
+					int index = rnd.Next (0, 4 - i);
+					points_ind_temp.Add (points_ind [index]);
+					points_ind.RemoveAt (index);
+				}
+					posn = new Vector3[5] {
+						points[points_ind_temp[0]],
+						points[points_ind_temp[1]],
+						points[points_ind_temp[2]],
+						points[points_ind_temp[3]],
+						points[points_ind_temp[4]]
+					};
 			}
 
 			// shuffle the letters' positions
@@ -125,7 +165,7 @@ namespace WordTree
 		// shuffle array
 		Vector3[] ShuffleArray(Vector3[] array)
 		{
-			for (int i = array.Length; i > 0; i--)
+				for (int i = array.Length; i > 0; i--)
 			{
 				int j = Random.Range (0,i);
 				Vector3 temp = array[j];
