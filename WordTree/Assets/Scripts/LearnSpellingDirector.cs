@@ -10,7 +10,10 @@ namespace WordTree
 {
 	public class LearnSpellingDirector : MonoBehaviour
 	{
-		
+		// Initalize list of possible locations for letters to go
+		List<Vector3> points = new List<Vector3>();
+
+	
 		// called on start, initialize stuff
 		void Start ()
 		{
@@ -32,6 +35,14 @@ namespace WordTree
 			StartCoroutine(ExplodeWord(1));
 			// then enable collisions to occur
 			StartCoroutine(EnableCollisions(2));
+			//Possible regions where letters can move
+			//TODO make sure these locations are on the screen
+			points.Add(new Vector3(-5.5f, 3.5f, 0f)); 
+			points.Add(new Vector3(-6f, -3.9f, 0f));
+			points.Add(new Vector3(-6f, 0f, 0f));
+			points.Add(new Vector3(4f, 3f, 0f));
+			points.Add(new Vector3(6f, 0f, 0f));
+
 		}
 
 		// create all letters and word object
@@ -58,35 +69,39 @@ namespace WordTree
 		// currently handles words with 3-5 letters
 		IEnumerator ExplodeWord(float delayTime)
 		{
-			System.Random rnd = new System.Random();
-			//List of possible locations for letters to go
-			List<Vector3> points = new List<Vector3>();
+			
+
 			//List of locations already used for letters
 			yield return new WaitForSeconds(delayTime);
 			// find movable letters
 			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
-			//Possible regions where letter can move
-			points.Add(new Vector3(-10f, 4f, 0f)); 
-			points.Add(new Vector3(-10f, -3f, 0f));
-			points.Add(new Vector3(-6f, 0f, 0f));
-			points.Add(new Vector3(4f, 3f, 0f));
-			points.Add(new Vector3(8f, 0f, 0f));
-			//Change order of list of points and put in new list 
-			List<Vector3> points_rand = points.OrderBy(x => rnd.Next ()).ToList();
-			foreach (GameObject letter in gos)
+			System.Random rnd = new System.Random();
+
+			//randomize list of points that letters can move too
+			 this.points= this.points.OrderBy(x => rnd.Next ()).ToList();
+
+
+			//move each letter to a random position
+			for (int i=0; i<gos.Length; i++)
 			{
-				{
+				//if we have more letters than points then do not move anything to prevent
+				//objects from colliding
+				if (i >= points.Count) {
+					Debug.LogError("We have more letters (" + gos.Length + ") than positions to "
+					+ "explode them to (" + points.Count + ")! We moved all we can.");
+					break;
+				}
 					//get first point off newly shuffled list
-					Vector3 new_position = points_rand[0];
+					//Vector3 new_position = points[0];
 					//move letter to new position
-					LeanTween.move(letter, new_position, 1.0f);
-					LeanTween.rotateAround(letter, Vector3.forward, 360f, 1.0f);
+				    LeanTween.move(gos[i], points[i], 1.0f);
+				LeanTween.rotateAround(gos[i], Vector3.forward, 360f, 1.0f);
 					//Remove most recently used position from list to prevent
 					//letters from going to the same location
-					points_rand.RemoveAt(0);
+					//points.RemoveAt(0);
 				} 
 			}
-		}
+
 		// enable collisions between target and movable letters
 		IEnumerator EnableCollisions(float delayTime)
 		{
@@ -116,7 +131,7 @@ namespace WordTree
 		// word object spins around to a cheerful sound
 		public static void CelebratoryAnimation(float delayTime)
 		{
-			 
+			
 			float time = 1f; // time to complete animation
 			GameObject go = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_WORD_OBJECT);
 			Debug.Log("Spinning " + go.name);
