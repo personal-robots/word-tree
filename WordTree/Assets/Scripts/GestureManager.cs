@@ -440,9 +440,12 @@ namespace WordTree
 				   <= this.cameraRect.yMin ||
 				   this.recentObj.transform.position.y
 				   >= this.cameraRect.yMax) {
-					//restricts object's position to rectangle with screen boundaries
-					transform.position = new Vector3 (Mathf.Clamp (transform.position.x, this.cameraRect.xMin, this.cameraRect.xMax),
-						Mathf.Clamp (transform.position.y, this.cameraRect.yMin, this.cameraRect.yMax), transform.position.z);
+					//if the most recently moved object would be off the screen, move it 
+					//within screen boundaries
+					this.recentObj.transform.position = new Vector3 (Mathf.Clamp (this.recentObj.transform.position.x, 
+						this.cameraRect.xMin, this.cameraRect.xMax),
+						Mathf.Clamp (this.recentObj.transform.position.y, this.cameraRect.yMin,
+							this.cameraRect.yMax), this.recentObj.transform.position.z);
 				}
 			}
 		}
