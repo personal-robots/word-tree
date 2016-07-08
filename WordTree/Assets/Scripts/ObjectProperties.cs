@@ -21,7 +21,7 @@ namespace WordTree
 
 
 		// set all properties
-		public void Init (string name, string tag, Vector3 posn, Vector3 scale, string sprite, string audioFile)
+		public void Init(string name, string tag, Vector3 posn, Vector3 scale, string sprite, string audioFile)
 		{
 
 			this.objName = name;
@@ -41,13 +41,13 @@ namespace WordTree
 		// create instance of ObjectProperties class
 		public static ObjectProperties CreateInstance(string name, string tag, Vector3 posn, Vector3 scale, string sprite, string audioFile)
 		{
-			ObjectProperties prop = ScriptableObject.CreateInstance<ObjectProperties> ();
-			prop.Init (name, tag, posn, scale, sprite, audioFile);
+			ObjectProperties prop = ScriptableObject.CreateInstance<ObjectProperties>();
+			prop.Init(name, tag, posn, scale, sprite, audioFile);
 			return prop;
 		}
 
 		// instantiate new game object with specified properties
-		public static void InstantiateObject (ObjectProperties prop)
+		public static void InstantiateObject(ObjectProperties prop)
 		{
 			// create new game object
 			GameObject go = new GameObject();
@@ -55,23 +55,23 @@ namespace WordTree
 			// set name
 			go.name = prop.Name();
 			
-			Debug.Log ("Created new object " + go.name);
+			Debug.Log("Created new object " + go.name);
 
 			// set tag
-			go.tag = prop.Tag ();
+			go.tag = prop.Tag();
 
 			// set initial position
-			go.transform.position = prop.InitPosn ();
+			go.transform.position = prop.InitPosn();
 
 			// set scale of sprite image
-			go.transform.localScale = prop.Scale ();
+			go.transform.localScale = prop.Scale();
 
 			// load sprite image
 			SpriteRenderer spriteRenderer = go.AddComponent<SpriteRenderer>();
 			// image file needs to be in an existing Assets/Resources folder or subfolder
-			Sprite sprite = Resources.Load<Sprite>("Graphics/" + prop.Sprite ());
+			Sprite sprite = Resources.Load<Sprite>("Graphics/" + prop.Sprite());
 			if (sprite == null)
-				Debug.Log("ERROR: could not load sprite " + prop.Name ());
+				Debug.Log("ERROR: could not load sprite " + prop.Name());
 			spriteRenderer.sprite = sprite;
 
 			// load audio clip
@@ -81,7 +81,7 @@ namespace WordTree
 				// audio file needs to be in an existing Assets/Resources folder or subfolder
 				AudioClip clip = Resources.Load("Audio/" + prop.AudioFile ()) as AudioClip;
 				if (clip == null)
-					Debug.Log ("ERROR: could not load audioclip " + prop.AudioFile ());
+					Debug.Log("ERROR: could not load audioclip " + prop.AudioFile ());
 				audioSource.clip = clip;
 				audioSource.playOnAwake = false;
 			}
@@ -118,7 +118,7 @@ namespace WordTree
 			if (go.tag == Constants.Tags.TAG_JAR) {
 				// add circle collider
 				// used to detect collisions
-				CircleCollider2D cc2d = go.AddComponent<CircleCollider2D> ();
+				CircleCollider2D cc2d = go.AddComponent<CircleCollider2D>();
 
 				// set radius for circle collider
 				// want to set radius exactly so that it extends to the rim/opening of the jar
@@ -140,11 +140,11 @@ namespace WordTree
 			}
 
 			// subscribe to gestures
-			GestureManager gm = go.AddComponent<GestureManager> ();
-			gm.AddAndSubscribeToGestures (go); 
+			GestureManager gm = go.AddComponent<GestureManager>();
+			gm.AddAndSubscribeToGestures(go); 
 
 			// add pulse behavior - draws attention to interactive objects
-			go.AddComponent<PulseBehavior> ();
+			go.AddComponent<PulseBehavior>();
 
 
 			if (go.tag == "Hint") 

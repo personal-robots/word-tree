@@ -12,25 +12,25 @@ namespace WordTree
 		void Start () {
 			//create instance of grestureManager
 			GestureManager gestureManager =GameObject.FindGameObjectWithTag
-				(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
+				(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager>();
 
 			// create letters, blanks, and word object
-			LoadSpellingGameWord (ProgressManager.currentWord);
+			LoadSpellingGameWord(ProgressManager.currentWord);
 
 			// subscribe buttons to gestures
-			GameObject[] buttons = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_BUTTON);
+			GameObject[] buttons = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_BUTTON);
 			foreach (GameObject button in buttons)
-				button.AddComponent<GestureManager> ().AddAndSubscribeToGestures (button);
+				button.AddComponent<GestureManager>().AddAndSubscribeToGestures(button);
 
 			// sound out word
 			GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_BLANK);
-			GameObject audioManager = GameObject.Find ("AudioManager");
+			GameObject audioManager = GameObject.Find("AudioManager");
 			audioManager.GetComponent<AudioManager>().SpellOutWord(tar);
 
 			// start pulsing movable letters
-			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
+			GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
 			foreach (GameObject go in mov) {
-				go.GetComponent<PulseBehavior> ().StartPulsing (go, (tar.Length+1) * AudioManager.clipLength);
+				go.GetComponent<PulseBehavior>().StartPulsing(go, (tar.Length+1) * AudioManager.clipLength);
 			}
 
 		}
@@ -41,17 +41,17 @@ namespace WordTree
 		{
 			// get properties of current word in game
 			WordProperties prop = WordProperties.GetWordProperties(word);
-			string[] phonemes = prop.Phonemes (); // phonemes in word
-			float objScale = prop.ObjScale (); // scale of object
+			string[] phonemes = prop.Phonemes(); // phonemes in word
+			float objScale = prop.ObjScale(); // scale of object
 
 			// create word with scrambled letters
-			WordCreation.CreateScrambledWord (word, phonemes);
+			WordCreation.CreateScrambledWord(word, phonemes);
 
 			// create blanks
 			BlankCreation.CreateBlanks(word, phonemes, "Rectangle", "TargetBlank", "SpellingGame");
 
 			// create word object
-			CreateWordImage (word, objScale);
+			CreateWordImage(word, objScale);
 				
 		}
 
@@ -61,8 +61,8 @@ namespace WordTree
 			float y = 3; // y-position of object
 
 			// instantiate object
-			ObjectProperties Obj = ObjectProperties.CreateInstance (word, "WordObject", new Vector3 (0, y, 0), new Vector3 (scale, scale, 1), ProgressManager.currentLevel + "/" + word, "Words/" + word);
-			ObjectProperties.InstantiateObject (Obj);
+			ObjectProperties Obj = ObjectProperties.CreateInstance(word, "WordObject", new Vector3 (0, y, 0), new Vector3 (scale, scale, 1), ProgressManager.currentLevel + "/" + word, "Words/" + word);
+			ObjectProperties.InstantiateObject(Obj);
 		}
 
 		// sound out word
@@ -88,7 +88,7 @@ namespace WordTree
 			}
 
 			// sound out word
-			GameObject audioManager = GameObject.Find ("AudioManager");
+			GameObject audioManager = GameObject.Find("AudioManager");
 			audioManager.GetComponent<AudioManager>().SpellOutWord(mov);
 		}
 
@@ -98,20 +98,20 @@ namespace WordTree
 		public static void TryAgainAnimation()
 		{	
 			// find red X object
-			GameObject tryAgain = GameObject.Find ("TryAgain");
+			GameObject tryAgain = GameObject.Find("TryAgain");
 
 			// object appears for a second
-			LeanTween.alpha (tryAgain, 1f, .1f);
-			LeanTween.alpha (tryAgain, 0f, .1f).setDelay (1f);
+			LeanTween.alpha(tryAgain, 1f, .1f);
+			LeanTween.alpha(tryAgain, 0f, .1f).setDelay(1f);
 
 			// grow and shrink object once
-			LeanTween.scale (tryAgain, new Vector3 (2f,2f, 1), .7f);
-			LeanTween.scale (tryAgain, new Vector3 (.5f,.5f,1), .5f).setDelay (.5f);
+			LeanTween.scale(tryAgain, new Vector3 (2f,2f, 1), .7f);
+			LeanTween.scale(tryAgain, new Vector3 (.5f,.5f,1), .5f).setDelay (.5f);
 
 			// play "slap" sound
-			tryAgain.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/IncorrectSound") as AudioClip;
+			tryAgain.AddComponent<AudioSource> ().clip = Resources.Load("Audio/IncorrectSound") as AudioClip;
 			if (tryAgain.GetComponent<AudioSource>().clip != null)
-				tryAgain.GetComponent<AudioSource>().Play ();
+				tryAgain.GetComponent<AudioSource>().Play();
 			
 		}
 
@@ -122,30 +122,30 @@ namespace WordTree
 
 			float time = .3f; // time to complete one pulse
 
-			GameObject go = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_WORD_OBJECT);
+			GameObject go = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_WORD_OBJECT);
 
 			// grow and shirnk object a few times
 			Debug.Log ("Pulsing " + go.name);
-			float objScale = WordProperties.GetWordProperties (go.name).ObjScale ();
-			LeanTween.scale (go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay (delayTime);
-			LeanTween.scale (go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay (delayTime + time);
-			LeanTween.scale (go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay (delayTime + 2*time);
-			LeanTween.scale (go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay (delayTime + 3*time);
-			LeanTween.scale (go, new Vector3 (objScale * 1f, objScale * 1f, 1), time).setDelay (delayTime + 4 * time);
+			float objScale = WordProperties.GetWordProperties(go.name).ObjScale();
+			LeanTween.scale(go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay(delayTime);
+			LeanTween.scale(go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay(delayTime + time);
+			LeanTween.scale(go, new Vector3 (objScale * 1.5f, objScale * 1.5f, 1f), time).setDelay(delayTime + 2*time);
+			LeanTween.scale(go, new Vector3 (objScale * .7f, objScale * .7f, 1), time).setDelay(delayTime + 3*time);
+			LeanTween.scale (go, new Vector3 (objScale * 1f, objScale * 1f, 1), time).setDelay(delayTime + 4 * time);
 
 			// play cheerful sound
-			Debug.Log ("Playing clip for congrats");
-			AudioSource audio = go.AddComponent<AudioSource> ();
-			audio.clip = Resources.Load ("Audio/CongratsSound") as AudioClip;
-			audio.PlayDelayed (delayTime);
+			Debug.Log("Playing clip for congrats");
+			AudioSource audio = go.AddComponent<AudioSource>();
+			audio.clip = Resources.Load("Audio/CongratsSound") as AudioClip;
+			audio.PlayDelayed(delayTime);
 
 			
 		}
 			void Update ()
 		{
 			// if user presses escape or 'back' button on android, exit program
-			if (Input.GetKeyDown (KeyCode.Escape))
-				Application.Quit ();
+			if (Input.GetKeyDown(KeyCode.Escape))
+				Application.Quit();
 		}	
 
 

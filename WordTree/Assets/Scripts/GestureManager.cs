@@ -19,10 +19,10 @@ namespace WordTree
 		public  void Start(){
 			// store camera parameters for adjusting screen size
 			//convert camera parameters to world view for calculations
-			Vector3 bottomLeft = Camera.main.ScreenToWorldPoint (Vector3.zero);
-			Vector3 topRight = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth, 
+			Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
+			Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 
 				Camera.main.pixelHeight));
-			this.cameraRect = new Rect (bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
+			this.cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 		}
 		// subscribes an object to all relevant gestures, according to its tag
 		public void AddAndSubscribeToGestures (GameObject go)
@@ -37,25 +37,25 @@ namespace WordTree
 
 			if (go.tag == Constants.Tags.TAG_MOVABLE_LETTER || go.tag == Constants.Tags.TAG_MOVABLE_BLANK) {
 				// add pan gesture component
-				TransformGesture pg = go.AddComponent<TransformGesture> ();
+				TransformGesture pg = go.AddComponent<TransformGesture>();
 				pg.CombineTouchesInterval = 0.2f;
 				// subscribe to pan events
 				pg.TransformStarted += panStartedHandler;
 				pg.Transformed += pannedHandler;
 				pg.TransformCompleted += panCompleteHandler;
-				Debug.Log (go.name + " subscribed to pan events");
+				Debug.Log(go.name + " subscribed to pan events");
 
 				// add press gesture component
-				PressGesture prg = go.AddComponent<PressGesture> ();
+				PressGesture prg = go.AddComponent<PressGesture>();
 				// subscribe to press events
 				prg.Pressed += pressedHandler;
-				Debug.Log (go.name + " subscribed to press events");
+				Debug.Log(go.name + " subscribed to press events");
 
 				// add release gesture component
-				ReleaseGesture rg = go.AddComponent<ReleaseGesture> ();
+				ReleaseGesture rg = go.AddComponent<ReleaseGesture>();
 				// subscribe to release events
 				rg.Released += releasedHandler;
-				Debug.Log (go.name + " subscribed to release events");
+				Debug.Log(go.name + " subscribed to release events");
 
 				// add transformer component so object automatically moves on drag
 				go.AddComponent<Transformer>();
@@ -64,7 +64,7 @@ namespace WordTree
 
 			if (go.tag == Constants.Tags.TAG_TARGET_LETTER || go.tag == Constants.Tags.TAG_TARGET_BLANK) {
 				// add press gesture component
-				PressGesture prg = go.AddComponent<PressGesture> ();
+				PressGesture prg = go.AddComponent<PressGesture>();
 				// subscribe to press events
 				prg.Pressed += pressedHandler;
 				Debug.Log (go.name + " subscribed to press events");
@@ -72,67 +72,67 @@ namespace WordTree
 		}
 
 		// enable all gesture events
-		public void EnableGestures (GameObject go)
+		public void EnableGestures(GameObject go)
 		{
 			// enable tap events
-			TapGesture tg = go.GetComponent<TapGesture> ();
+			TapGesture tg = go.GetComponent<TapGesture>();
 			if (tg != null) {
 				tg.enabled = true;
 			}
 
 			// enable pan events
-			TransformGesture pg = go.GetComponent<TransformGesture> ();
+			TransformGesture pg = go.GetComponent<TransformGesture>();
 			if (pg != null) {
 				pg.enabled = true;
 			}
 
 			// enable press events
-			PressGesture prg = go.GetComponent<PressGesture> ();
+			PressGesture prg = go.GetComponent<PressGesture>();
 			if (prg != null) {
 				prg.enabled = true;
 			}
 
 			// enable release events
-			ReleaseGesture rg = go.GetComponent<ReleaseGesture> ();
+			ReleaseGesture rg = go.GetComponent<ReleaseGesture>();
 			if (rg != null) {
 				rg.enabled = true;
 			}
 			
-			Debug.Log ("Enabled gestures for " + go.name);
+			Debug.Log("Enabled gestures for " + go.name);
 		}
 
 		// disable all gesture events
-		public void DisableGestures (GameObject go)
+		public void DisableGestures(GameObject go)
 		{
 			// disable tap events
-			TapGesture tg = go.GetComponent<TapGesture> ();
+			TapGesture tg = go.GetComponent<TapGesture>();
 			if (tg != null) {
 				tg.enabled = false;
 			}
 
 			// disable pan events
-			TransformGesture pg = go.GetComponent<TransformGesture> ();
+			TransformGesture pg = go.GetComponent<TransformGesture>();
 			if (pg != null) {
 				pg.enabled = false;
 			}
 
 			// disable press events
-			PressGesture prg = go.GetComponent<PressGesture> ();
+			PressGesture prg = go.GetComponent<PressGesture>();
 			if (prg != null) {
 				prg.enabled = false;
 			}
 
 			// disable release events
-			ReleaseGesture rg = go.GetComponent<ReleaseGesture> ();
+			ReleaseGesture rg = go.GetComponent<ReleaseGesture>();
 			if (rg != null) {
 				rg.enabled = false;
 			}
 
-			Debug.Log ("Disabled gestures for " + go.name);
+			Debug.Log("Disabled gestures for " + go.name);
 		}
 
 		// Handle all tap events. Trigger actions in response.
-		private void tappedHandler (object sender, EventArgs e)
+		private void tappedHandler(object sender, EventArgs e)
 		{
 			// get the gesture that was sent to us
 			// this gesture will tell us what object was touched
@@ -143,9 +143,9 @@ namespace WordTree
 			// get info about where the hit object was located when the gesture was
 			// recognized - i.e., where on the object (in screen dimensions) did
 			// the tap occur?
-			if (gesture.GetTargetHitResult (out hit)) { 
+			if (gesture.GetTargetHitResult(out hit)) { 
 				// want the info as a 2D point 
-				Debug.Log ("TAP on " + gesture.gameObject.name + " at " + hit.Point);
+				Debug.Log("TAP on " + gesture.gameObject.name + " at " + hit.Point);
 			}
 
 			// if kid is tapped - stop pulsing kid, make kid bounce up and down, make kid speak
@@ -154,7 +154,7 @@ namespace WordTree
 				BounceKid(go);
 				go.AddComponent<AudioSource>().clip = Resources.Load ("Audio/KidSpeaking/Intro") as AudioClip;
 				if (go.GetComponent<AudioSource>().clip != null)
-					go.GetComponent<AudioSource>().Play ();
+					go.GetComponent<AudioSource>().Play();
 
 				// keep track of which kid was tapped on (boy or girl)
 				ProgressManager.chosenKid = go.name;
@@ -180,24 +180,24 @@ namespace WordTree
 			// 3. Sound Game
 			// The name of each level icon has either the number 1, 2, or 3 appended to it. The number corresponds to the mode.
 			// If level icon is tapped - keep track of what mode it is
-			if (go.name.Substring(go.name.Length-1).Equals ("1"))
+			if (go.name.Substring(go.name.Length-1).Equals("1"))
 				ProgressManager.currentMode = 1;
-			if (go.name.Substring(go.name.Length-1).Equals ("2"))
+			if (go.name.Substring(go.name.Length-1).Equals("2"))
 				ProgressManager.currentMode = 2;
-			if (go.name.Substring(go.name.Length-1).Equals ("3"))
+			if (go.name.Substring(go.name.Length-1).Equals("3"))
 				ProgressManager.currentMode = 3;
 
 			// if a word object is tapped on in the Choose Object scene, load the appropriate scene
 			if (go.tag == "WordObject" && Application.loadedLevelName == "3. Choose Object") {
 				// if the mode is 1, go to Learn Spelling scene
 				if (ProgressManager.currentMode == 1)
-					Application.LoadLevel ("4. Learn Spelling");
+					Application.LoadLevel("4. Learn Spelling");
 				// if the mode is 2, go to Spelling Game scene
 				if (ProgressManager.currentMode == 2)
-					Application.LoadLevel ("5. Spelling Game");
+					Application.LoadLevel("5. Spelling Game");
 				// if the mode is 3, go to Sound Game scene
 				if (ProgressManager.currentMode == 3)
-					Application.LoadLevel ("6. Sound Game");
+					Application.LoadLevel("6. Sound Game");
 				// keep track of the name of the word object that was tapped on (the current word)
 				ProgressManager.currentWord = gesture.gameObject.name;
 			}
@@ -208,36 +208,36 @@ namespace WordTree
 
 			// if home button is tapped, go back to the intro scene
 			if (go.name == "HomeButton")
-				Application.LoadLevel ("1. Intro");
+				Application.LoadLevel("1. Intro");
 
 			// if tree button is tapped, shrink kid into tree icon and go back to Word Tree scene
 			if (go.name == "TreeButton") {
 				ShrinkKid(go.transform.position);
 
-				StartCoroutine(LoadLevel ("2. Word Tree",1f));
+				StartCoroutine(LoadLevel("2. Word Tree",1f));
 			}
 
 			// if back button is tapped, go to Choose Object scene
 			if (go.name == "BackButton")
-				Application.LoadLevel ("3. Choose Object");
+				Application.LoadLevel("3. Choose Object");
 
 			// if sound button is tapped, play word's sound
 			if (go.name == "SoundButton")
-				GameObject.FindGameObjectWithTag ("WordObject").GetComponent<AudioSource>().Play ();
+				GameObject.FindGameObjectWithTag("WordObject").GetComponent<AudioSource>().Play ();
 
 			// if hint button is tapped, show a hint
 			if (go.name == "HintButton") {
 				// if scene is Spelling Game, show a letter hint
 				if (Application.loadedLevelName == "5. Spelling Game")
-					CollisionManager.ShowLetterHint ();
+					CollisionManager.ShowLetterHint();
 				// if scene is Sound Game, show a sound hint
 				if (Application.loadedLevelName == "6. Sound Game")
-					CollisionManager.ShowSoundHint ();
+					CollisionManager.ShowSoundHint();
 			}
 
 			// if the closed lock icon is tapped, unlock all levels of the word tree
 			if (go.name == "LockClosed") {
-				ProgressManager.UnlockAllLevels ();
+				ProgressManager.UnlockAllLevels();
 				ProgressManager.lockStatus = "LockOpen"; // change status of lock to open
 
 				// move closed lock icon to behind the background and disable touch gestures
@@ -245,32 +245,32 @@ namespace WordTree
 				go.GetComponent<GestureManager>().DisableGestures(go);
 
 				// move open lock icon in front of background and subscribe to touch gestures
-				GameObject lockOpen = GameObject.Find ("LockOpen");
-				LeanTween.moveZ (lockOpen,-2f,.01f);
+				GameObject lockOpen = GameObject.Find("LockOpen");
+				LeanTween.moveZ(lockOpen,-2f,.01f);
 				lockOpen.AddComponent<GestureManager>().AddAndSubscribeToGestures(lockOpen);
 
 			}
 
 			// if the open lock icon is tapped, remove all levels not yet completed from word tree
 			if (go.name == "LockOpen") {
-				ProgressManager.RelockLevels ();
+				ProgressManager.RelockLevels();
 				ProgressManager.lockStatus = "LockClosed"; // change status of lock to closed
 
 				// move open lock icon to behind background and disable touch gestures
-				LeanTween.moveZ (go, 3f, .01f);
+				LeanTween.moveZ(go, 3f, .01f);
 				go.GetComponent<GestureManager>().DisableGestures(go);
 
 				// move closed lock icon in front of background and subscribe to touch gestures
-				GameObject lockClosed = GameObject.Find ("LockClosed");
-				LeanTween.moveZ (lockClosed,-2f,.01f);
+				GameObject lockClosed = GameObject.Find("LockClosed");
+				LeanTween.moveZ(lockClosed,-2f,.01f);
 				lockClosed.AddComponent<GestureManager>().AddAndSubscribeToGestures(lockClosed);
 			}
 
 			// if any button is tapped, darken the button briefly to indicate to user that 
 			// tap gesture has been registered
 			if (go.tag == Constants.Tags.TAG_BUTTON) {
-				LeanTween.color (go, Color.grey, .01f);
-				LeanTween.color (go, Color.white, .01f).setDelay (.2f);
+				LeanTween.color(go, Color.grey, .01f);
+				LeanTween.color(go, Color.white, .01f).setDelay(.2f);
 			}
 				
 

@@ -10,10 +10,10 @@ namespace WordTree
 
 		// Starts pulsing an object
 		// Indicates that the object can be interacted with
-		public void StartPulsing (GameObject go, float delayTime = 0)
+		public void StartPulsing(GameObject go, float delayTime = 0)
 		{
 			float scaleUpBy = 1.2f; // how much to scale up object by
-			float time = Random.Range (.8f,1.0f); // time to complete one pulse, randomized so each object is pulsing at different rate (looks better)
+			float time = Random.Range(.8f,1.0f); // time to complete one pulse, randomized so each object is pulsing at different rate (looks better)
 			
 			LeanTween.scale(go, new Vector3(go.transform.localScale.x * scaleUpBy, go.transform.localScale.y * scaleUpBy, 
 			                                go.transform.localScale.z * scaleUpBy), time)
@@ -23,7 +23,7 @@ namespace WordTree
 		// Stops pulsing the object
 		public void StopPulsing (GameObject go)
 		{
-			LeanTween.cancel (go);
+			LeanTween.cancel(go);
 		}
 
 	}

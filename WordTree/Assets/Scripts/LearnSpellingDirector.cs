@@ -78,7 +78,7 @@ namespace WordTree
 			System.Random rnd = new System.Random();
 
 			//randomize the positions that letters can explode too
-			 this.points= this.points.OrderBy(x => rnd.Next ()).ToList();
+			this.points= this.points.OrderBy(x => rnd.Next()).ToList();
 			//move each letter to a random position
 			for (int i=0; i<gos.Length; i++)
 			{
@@ -140,8 +140,8 @@ namespace WordTree
 				LeanTween.moveY(letter, -3f, time).setDelay(delayTime);
 			// play sound 
 			Debug.Log("Playing clip for congrats");
-			AudioSource audio = go.AddComponent<AudioSource>();
-			audio.clip = Resources.Load ("Audio/CongratsSound") as AudioClip;
+			AudioSource audio = go.AddComponent<AudioSource> ();
+			audio.clip = Resources.Load("Audio/CongratsSound") as AudioClip;
 			audio.PlayDelayed(delayTime);
 		}
 

@@ -27,7 +27,7 @@ namespace WordTree{
 			int[,] order = new int[4, word.Length]; //contains pre-specified ways to rearrange the order of blanks
 
 			//Instantiate blanks - normal order
-			CreateBlanks (word, sounds, shape, tag, mode);
+			CreateBlanks(word, sounds, shape, tag, mode);
 
 			// Preset 4 different shuffling templates for each possible word length
 			// i.e. different ways to shuffle the letters in the word
@@ -60,7 +60,7 @@ namespace WordTree{
 				posn [i] = blanks[i].transform.position;
 
 			//int index: randomly pick a preset shuffling template (4 to choose from currently)
-			int index = Random.Range (0,4);
+			int index = Random.Range(0,4);
 			//Shuffle blanks positions
 			//i.e. move blanks to new positions
 			for (int i = 0; i<blanks.Length; i++) {
@@ -74,7 +74,7 @@ namespace WordTree{
 		{
 			for (int i = array.Length; i > 0; i--)
 			{
-				int j = Random.Range (0,i);
+				int j = Random.Range(0,i);
 				Vector3 temp = array[j];
 				array[j] = array[i - 1];
 				array[i - 1]  = temp;
@@ -87,7 +87,7 @@ namespace WordTree{
 		{
 			for (int i = array.Length; i > 0; i--)
 			{
-				int j = Random.Range (0,i);
+				int j = Random.Range(0,i);
 				Color temp = array[j];
 				array[j] = array[i - 1];
 				array[i - 1]  = temp;
@@ -134,33 +134,33 @@ namespace WordTree{
 			Vector3[] position = new Vector3[word.Length];
 			if (word.Length == 3) {
 				position = new Vector3[3]{
-					new Vector3 (-1f * blankWidth, y, z),
-					new Vector3 (0, y, z),
-					new Vector3 (1f * blankWidth, y, z)
+					new Vector3(-1f * blankWidth, y, z),
+					new Vector3(0, y, z),
+					new Vector3(1f * blankWidth, y, z)
 				};
 			}
 			if (word.Length == 4) {
 				position = new Vector3[4] {
-					new Vector3 (-1.5f * blankWidth, y, z),
-					new Vector3 (-.5f * blankWidth, y, z),
-					new Vector3 (.5f * blankWidth, y, z),
-					new Vector3 (1.5f * blankWidth, y, z),
+					new Vector3(-1.5f * blankWidth, y, z),
+					new Vector3(-.5f * blankWidth, y, z),
+					new Vector3(.5f * blankWidth, y, z),
+					new Vector3(1.5f * blankWidth, y, z),
 				};
 			}
 			if (word.Length == 5) {
 				position = new Vector3[5] {
-					new Vector3 (-2f * blankWidth, y, z),
-					new Vector3 (-1f * blankWidth, y, z),
-					new Vector3 (0, y, z),
-					new Vector3 (1f * blankWidth, y, z),
-					new Vector3 (2f * blankWidth, y, z)
+					new Vector3(-2f * blankWidth, y, z),
+					new Vector3(-1f * blankWidth, y, z),
+					new Vector3(0, y, z),
+					new Vector3(1f * blankWidth, y, z),
+					new Vector3(2f * blankWidth, y, z)
 				};
 			}
 
 			//Assign properties for the blanks according to input given, then instantiate each blank
 			for (int i=0; i<word.Length; i++) {
-				ObjectProperties blank = ObjectProperties.CreateInstance (letterArray [i], tag, position [i], new Vector3 (xScale, yScale, 1), shape, "Phonemes/" + sounds [i]);
-				ObjectProperties.InstantiateObject (blank);
+				ObjectProperties blank = ObjectProperties.CreateInstance(letterArray [i], tag, position [i], new Vector3 (xScale, yScale, 1), shape, "Phonemes/" + sounds [i]);
+				ObjectProperties.InstantiateObject(blank);
 			}
 
 

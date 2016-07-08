@@ -41,7 +41,7 @@ namespace WordTree
 			}
 
 			//Wait for previous letters to complete before pulsing
-			StartCoroutine(PulseLetter (go,index*clipLength));
+			StartCoroutine(PulseLetter(go,index*clipLength));
 		}
 
 		//Play audio clip for while pulsing the word once
@@ -82,9 +82,9 @@ namespace WordTree
 				float yScale = 1.5f; // vertical scale of blank
 
 				//Scale up blank
-				LeanTween.scale(go, new Vector3(1.15f * xScale, 1.15f * yScale, 1), pulseLength).setDelay (.2f);
+				LeanTween.scale(go, new Vector3(1.15f * xScale, 1.15f * yScale, 1), pulseLength).setDelay(.2f);
 				//Then scale down blank back to original size
-				LeanTween.scale(go, new Vector3 (xScale, yScale, 1), clipLength * .5f).setDelay (clipLength * .5f);
+				LeanTween.scale(go, new Vector3 (xScale, yScale, 1), clipLength * .5f).setDelay(clipLength * .5f);
 			}
 			Debug.Log("Pulse on " + go.name);
 
@@ -102,7 +102,7 @@ namespace WordTree
 					// scale up letter
 					LeanTween.scale(gos [i], new Vector3 (scaleUp * WordCreation.letterScale, scaleUp * WordCreation.letterScale, 1), pulseLength).setDelay(.2f);
 					// then scale down letter to original size
-					LeanTween.scale(gos [i], new Vector3 (1f * WordCreation.letterScale, 1f * WordCreation.letterScale, 1), clipLength * .5f).setDelay (clipLength * .5f);
+					LeanTween.scale(gos [i], new Vector3 (1f * WordCreation.letterScale, 1f * WordCreation.letterScale, 1), clipLength * .5f).setDelay(clipLength * .5f);
 				}
 			}
 
@@ -114,12 +114,12 @@ namespace WordTree
 
 				for (int i=0; i < gos.Length; i++) {
 					//Scale up blank
-					LeanTween.scale(gos [i], new Vector3(1.15f * xScale, 1.15f * yScale, 1), pulseLength).setDelay (.2f);
+					LeanTween.scale(gos [i], new Vector3(1.15f * xScale, 1.15f * yScale, 1), pulseLength).setDelay(.2f);
 					//Then scale down blank back to original size
-					LeanTween.scale(gos [i], new Vector3(xScale, yScale, 1), clipLength * .5f).setDelay (clipLength * .5f);
+					LeanTween.scale(gos [i], new Vector3(xScale, yScale, 1), clipLength * .5f).setDelay(clipLength * .5f);
 				}
 			}
-			Debug.Log ("Pulse on word");
+			Debug.Log("Pulse on word");
 			
 		}
 

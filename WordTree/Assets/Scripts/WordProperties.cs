@@ -33,8 +33,8 @@ namespace WordTree
 		// Create an instance of WordProperties with the desired properties set
 		static WordProperties CreateInstance(string[] phonemes, float objScale)
 		{
-			WordProperties prop = ScriptableObject.CreateInstance<WordProperties> ();
-			prop.Init (phonemes, objScale);
+			WordProperties prop = ScriptableObject.CreateInstance<WordProperties>();
+			prop.Init(phonemes, objScale);
 			return prop;
 		}
 

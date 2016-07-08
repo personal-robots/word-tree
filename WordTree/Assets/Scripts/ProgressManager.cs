@@ -20,15 +20,15 @@ namespace WordTree
 		public static string currentLevel = ""; // current level
 		public static int currentMode = 0; // current mode
 		
-		public static List<string> completedWordsLearn = new List<string>(); // list of words completed for Learn Spelling mode
-		public static List<string> completedWordsSpell = new List<string>(); // list of words completed for Spelling Game mode
-		public static List<string> completedWordsSound = new List<string>(); // list of words completed for Sound Game mode
+		public static List<string>completedWordsLearn = new List<string>(); // list of words completed for Learn Spelling mode
+		public static List<string>completedWordsSpell = new List<string>(); // list of words completed for Spelling Game mode
+		public static List<string>completedWordsSound = new List<string>(); // list of words completed for Sound Game mode
 
 		public static List<string> completedLevels = new List<string>(); // list of completed levels
-		public static List<string> unlockedLevels = new List<string> (); // list of levels "unlocked" by user
+		public static List<string> unlockedLevels = new List<string>(); // list of levels "unlocked" by user
 
 		public static int numLevels = 12; // total number of levels (and each level has three modes - types of games to play for that set of words)
-		public static List<string> levelList = new List<string> (); // list of all levels (36 currently, because 3 modes per level/category)
+		public static List<string>levelList = new List<string>(); // list of all levels (36 currently, because 3 modes per level/category)
 
 		// set order that levels will be unlocked
 		public static string SetLevelOrder(int index)
@@ -67,12 +67,12 @@ namespace WordTree
 		{
 			for (int i=1; i<=numLevels; i++) {
 				// get a level
-				string level = SetLevelOrder (i);
+				string level = SetLevelOrder(i);
 
 				// add the three game modes for that level to list of levels
-				levelList.Add (level + "1");
-				levelList.Add (level + "2");
-				levelList.Add (level + "3");
+				levelList.Add(level + "1");
+				levelList.Add(level + "2");
+				levelList.Add(level + "3");
 			}
 		}
 
@@ -91,7 +91,7 @@ namespace WordTree
 				index = levelList.IndexOf (level + "3");
 
 			// add the next level to list of unlocked levels
-			AddUnlockedLevel (levelList[index+1]);
+			AddUnlockedLevel(levelList[index+1]);
 
 		}
 
@@ -101,28 +101,28 @@ namespace WordTree
 		{ 
 			// add word to completedWordsLearn list if scene is Learn Spelling
 			if (Application.loadedLevelName == "4. Learn Spelling")
-				completedWordsLearn.Add (word);
+				completedWordsLearn.Add(word);
 
 			// add word to completedWordsSpell list if scene is Spelling Game
 			if (Application.loadedLevelName == "5. Spelling Game")
-				completedWordsSpell.Add (word);
+				completedWordsSpell.Add(word);
 
 			// add word to completedWordsSound list if scene is Sound Game
 			if (Application.loadedLevelName == "6. Sound Game")
-				completedWordsSound.Add (word);
+				completedWordsSound.Add(word);
 		}
 
 		// update completed level list
 		public static void AddCompletedLevel(string level)
 		{
 			if (ProgressManager.currentMode == 1)
-				completedLevels.Add (level + "1"); // 1 indicates mode is Learn Spelling
+				completedLevels.Add(level + "1"); // 1 indicates mode is Learn Spelling
 
 			if (ProgressManager.currentMode == 2)
-				completedLevels.Add (level + "2"); // 2 indicates mode is Spelling Game
+				completedLevels.Add(level + "2"); // 2 indicates mode is Spelling Game
 
 			if (ProgressManager.currentMode == 3)
-				completedLevels.Add (level + "3"); // 3 indicates mode is Sound Game
+				completedLevels.Add(level + "3"); // 3 indicates mode is Sound Game
 
 		}
 
@@ -133,28 +133,28 @@ namespace WordTree
 			// may happen if user chooses to play less advanced level first
 			// since multiple levels unlocked at beginning
 			if (unlockedLevels.Contains (level)) {
-				int index = levelList.IndexOf (level);
+				int index = levelList.IndexOf(level);
 				// add the next level not yet unlocked
-				unlockedLevels.Add (levelList [index + 3]);
+				unlockedLevels.Add(levelList [index + 3]);
 			}
 
 			else 
-				unlockedLevels.Add (level);
+				unlockedLevels.Add(level);
 		}
 
 		// check if word is completed
 		public static bool IsWordCompleted(string word)
 		{
 			if (ProgressManager.currentMode == 1) {
-				if (completedWordsLearn.Contains (word))
+				if (completedWordsLearn.Contains(word))
 					return true;
 			}
 			if (ProgressManager.currentMode == 2) {
-				if (completedWordsSpell.Contains (word))
+				if (completedWordsSpell.Contains(word))
 					return true;
 			}
 			if (ProgressManager.currentMode == 3) {
-				if (completedWordsSound.Contains (word))
+				if (completedWordsSound.Contains(word))
 					return true;
 			}
 			return false;
@@ -164,7 +164,7 @@ namespace WordTree
 		// check if level is completed
 		public static bool IsLevelCompleted(string level)
 		{
-			if (completedLevels.Contains (level))
+			if (completedLevels.Contains(level))
 				return true;
 			return false;
 			
@@ -173,7 +173,7 @@ namespace WordTree
 		// check if level is unlocked
 		public static bool IsLevelUnlocked(string level)
 		{
-			if (unlockedLevels.Contains (level))
+			if (unlockedLevels.Contains(level))
 				return true;
 			return false;
 			
@@ -183,7 +183,7 @@ namespace WordTree
 		public static void UnlockAllLevels()
 		{
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_LEVEL_ICON);
 
 			foreach (GameObject go in gos) {
 				// make level icon appear
@@ -199,7 +199,7 @@ namespace WordTree
 
 				// start pulsing level icon if not already pulsing
 				if (!ProgressManager.IsLevelUnlocked(go.name))
-					go.AddComponent<PulseBehavior> ().StartPulsing (go);
+					go.AddComponent<PulseBehavior>().StartPulsing(go);
 			}
 		}
 
@@ -207,11 +207,11 @@ namespace WordTree
 		public static void RelockLevels()
 		{
 			// find level icons
-			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_LEVEL_ICON);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_LEVEL_ICON);
 
 			foreach (GameObject go in gos) {
 				// if level hasn't been unlocked yet
-				if (!ProgressManager.IsLevelUnlocked (go.name)) {
+				if (!ProgressManager.IsLevelUnlocked(go.name)) {
 					// make level icon disappear
 					Color color = go.GetComponent<Renderer>().material.color;
 					color.a = 0f;

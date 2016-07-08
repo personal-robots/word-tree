@@ -25,7 +25,7 @@ namespace WordTree
 			int[,] order = new int[4, word.Length]; // contains pre-specified ways to shuffle letters
 
 			// create word with movable letters
-			CreateWord (word, soundArray, "MovableLetter","SpellingGame");
+			CreateWord(word, soundArray, "MovableLetter","SpellingGame");
 
 			// set pre-specified shuffling templates (4 options for each word length)
 			if (word.Length == 3){
@@ -39,14 +39,14 @@ namespace WordTree
 			}
 
 			// get original position of each letter
-			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
+			GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
 			for (int i=0; i<mov.Length; i++)
 				posn [i] = mov[i].transform.position;
 
 			// shuffle letters - move to new position
 			int index = Random.Range (0,4);
 			for (int i = 0; i<mov.Length; i++) {
-				mov [i].transform.position = posn [order[index, i]-1];
+				mov [i].transform.position = posn[order[index, i]-1];
 			}
 
 
@@ -57,7 +57,7 @@ namespace WordTree
 		{
 			for (int i = array.Length; i > 0; i--)
 			{
-				int j = Random.Range (0,i);
+				int j = Random.Range(0,i);
 				Vector3 temp = array[j];
 				array[j] = array[i - 1];
 				array[i - 1]  = temp;
@@ -71,13 +71,13 @@ namespace WordTree
 		public static void CreateMovableAndTargetWords(string word, string[] soundArray)
 		{
 			// create movable letters
-			CreateWord (word, soundArray, "MovableLetter", "Learn");
+			CreateWord(word, soundArray, "MovableLetter", "Learn");
 
 			// create target letters
-			CreateWord (word, soundArray, "TargetLetter", "Learn");
+			CreateWord(word, soundArray, "TargetLetter", "Learn");
 
 			// change color of target letters to a faded out gray
-			GameObject[] tar = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_TARGET_LETTER);
+			GameObject[] tar = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_TARGET_LETTER);
 			foreach (GameObject go in tar) {
 				SpriteRenderer sprite = go.GetComponent<SpriteRenderer> ();
 				sprite.color = Color.black;
@@ -86,12 +86,12 @@ namespace WordTree
 				go.GetComponent<Renderer>().material.color = color;
 			}
 
-			GameObject[] mov = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_MOVABLE_LETTER);
+			GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
 			// set possible colors for movable letters
 			Color[] colors = new Color[] {Color.cyan,Color.blue,Color.magenta,Color.grey,Color.yellow};
 			// change each movable letter to different color
 			for (int i=0; i<mov.Length; i++) {
-				SpriteRenderer sprite = mov[i].GetComponent<SpriteRenderer> ();
+				SpriteRenderer sprite = mov[i].GetComponent<SpriteRenderer>();
 				sprite.color = colors[i];
 			}
 				
@@ -108,8 +108,8 @@ namespace WordTree
 
 			// want each letter as an uppercase string
 			for (int i=0; i<word.Length; i++) {
-				char letter = System.Char.ToUpper (word [i]);
-				letters[i] = System.Char.ToString (letter);
+				char letter = System.Char.ToUpper(word [i]);
+				letters[i] = System.Char.ToString(letter);
 			}
 
 			// set y-position for letters
@@ -130,34 +130,34 @@ namespace WordTree
 			// word centered at x = 0, letters evenly spread out according to letterWidth
 			if (word.Length == 3) {
 				position = new Vector3[3]{
-					new Vector3 (-1f*letterWidth, y, z),
-					new Vector3 (0, y, z),
-					new Vector3 (1f*letterWidth, y, z)
+					new Vector3(-1f*letterWidth, y, z),
+					new Vector3(0, y, z),
+					new Vector3(1f*letterWidth, y, z)
 				};
 			}
 			if (word.Length == 4) {
 				position = new Vector3[4] {
-					new Vector3 (-1.5f*letterWidth, y, z),
-					new Vector3 (-.5f*letterWidth, y, z),
-					new Vector3 (.5f*letterWidth, y, z),
-					new Vector3 (1.5f*letterWidth, y, z),
+					new Vector3(-1.5f*letterWidth, y, z),
+					new Vector3(-.5f*letterWidth, y, z),
+					new Vector3(.5f*letterWidth, y, z),
+					new Vector3(1.5f*letterWidth, y, z),
 				};
 			}
 			if (word.Length == 5) {
 				position = new Vector3[5] {
-					new Vector3 (-2f*letterWidth, y, z),
-					new Vector3 (-1f*letterWidth, y, z),
-					new Vector3 (0, y, z),
-					new Vector3 (1f*letterWidth, y, z),
-					new Vector3 (2f*letterWidth, y, z)
+					new Vector3(-2f*letterWidth, y, z),
+					new Vector3(-1f*letterWidth, y, z),
+					new Vector3(0, y, z),
+					new Vector3(1f*letterWidth, y, z),
+					new Vector3(2f*letterWidth, y, z)
 				};
 			}
 
 
 			for (int i=0; i<word.Length; i++) {
 				// create letter with desired properties according to input given
-				ObjectProperties letter = ObjectProperties.CreateInstance (letters [i], tag, position [i], new Vector3 (letterScale, letterScale, 1), "Letters/" + letters [i], "Phonemes/" + sounds [i]);
-				ObjectProperties.InstantiateObject (letter);
+				ObjectProperties letter = ObjectProperties.CreateInstance(letters [i], tag, position [i], new Vector3 (letterScale, letterScale, 1), "Letters/" + letters [i], "Phonemes/" + sounds [i]);
+				ObjectProperties.InstantiateObject(letter);
 			}
 
 

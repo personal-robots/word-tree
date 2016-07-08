@@ -15,58 +15,58 @@ namespace WordTree
 				FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager> ();
 
 			//Create objects and background
-			LoadLevel (ProgressManager.currentLevel);
+			LoadLevel(ProgressManager.currentLevel);
 
 			//Set up kid
-			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID);
-			kid.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Graphics/" + ProgressManager.chosenKid);
+			GameObject kid = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_KID);
+			kid.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Graphics/" + ProgressManager.chosenKid);
 
 			//Play Grow Animation for kid
-			GrowKid ();
+			GrowKid();
 
 			//Load audio for kid
-			kid.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/KidSpeaking/" + ProgressManager.currentLevel) as AudioClip;
+			kid.AddComponent<AudioSource>().clip = Resources.Load("Audio/KidSpeaking/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
 			if (kid.GetComponent<AudioSource>().clip != null) {
 				kid.GetComponent<AudioSource>().priority = 0;
 				kid.GetComponent<AudioSource>().volume = 1.0f;
 				//Play audio clip attached to kid if there is one
-				kid.GetComponent<AudioSource>().Play ();
+				kid.GetComponent<AudioSource>().Play();
 			}
 
 			//Find ChooseObjectDirector gameObject
-			GameObject dir = GameObject.Find ("ChooseObjectDirector");
+			GameObject dir = GameObject.Find("ChooseObjectDirector");
 			//Load background music for scene onto ChooseObjectDirector
-			dir.AddComponent<AudioSource> ().clip = Resources.Load ("Audio/BackgroundMusic/" + ProgressManager.currentLevel) as AudioClip;
+			dir.AddComponent<AudioSource> ().clip = Resources.Load("Audio/BackgroundMusic/" + ProgressManager.currentLevel) as AudioClip;
 			//Check if audio clip is attached
 			if (dir.GetComponent<AudioSource>().clip != null) {
 				dir.GetComponent<AudioSource>().priority = 0;
 				dir.GetComponent<AudioSource>().volume = .25f;
 				//Start playing background music if attached
-				dir.GetComponent<AudioSource>().Play ();
+				dir.GetComponent<AudioSource>().Play();
 			}
 
 			//Subscribe buttons to touch gestures
-			GameObject button = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_BUTTON);
-			button.AddComponent<GestureManager> ().AddAndSubscribeToGestures (button);
+			GameObject button = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_BUTTON);
+			button.AddComponent<GestureManager>().AddAndSubscribeToGestures(button);
 
 			//Find word objects
-			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_WORD_OBJECT);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_WORD_OBJECT);
 			foreach (GameObject go in gos) {
 
 				//Start pulsing for each object
 				Debug.Log ("Started pulsing for " + go.name);
-				go.GetComponent<PulseBehavior> ().StartPulsing (go);
+				go.GetComponent<PulseBehavior>().StartPulsing(go);
 
 				//Check if word has been completed by user
 
 				//If word not completed, darken and fade out object
 				if (!ProgressManager.IsWordCompleted(go.name)){
-					SetColorAndTransparency (go,Color.grey,.9f);
+					SetColorAndTransparency(go,Color.grey,.9f);
 				}
 				//If word completed, brighten and fill in object
 				if (ProgressManager.IsWordCompleted(go.name)){
-					Debug.Log ("Word Completed: " + go.name);
+					Debug.Log("Word Completed: " + go.name);
 					SetColorAndTransparency(go,Color.white,1f);
 				}
 			}
@@ -74,8 +74,8 @@ namespace WordTree
 			//Check if this level has been completed, i.e. if all words in the level have been completed
 			if (CheckCompletedLevel ()) {
 				//If level completed, add to completedLevels list and unlock the next level
-				ProgressManager.AddCompletedLevel (ProgressManager.currentLevel);
-				ProgressManager.UnlockNextLevel (ProgressManager.currentLevel);
+				ProgressManager.AddCompletedLevel(ProgressManager.currentLevel);
+				ProgressManager.UnlockNextLevel(ProgressManager.currentLevel);
 			}
 
 
@@ -85,15 +85,15 @@ namespace WordTree
 		void Update(){
 
 			//Find ChooseObjectDirector
-			GameObject dir = GameObject.Find ("ChooseObjectDirector");
+			GameObject dir = GameObject.Find("ChooseObjectDirector");
 
 			//If attached audio (background music) has stopped playing, play the audio
 			//For keeping background music playing in a loop
 			if (!dir.GetComponent<AudioSource>().isPlaying)
-				dir.GetComponent<AudioSource>().Play ();
+				dir.GetComponent<AudioSource>().Play();
 			// if user presses escape or 'back' button on android, exit program
 			if (Input.GetKeyDown (KeyCode.Escape))
-				Application.Quit ();
+				Application.Quit();
 			
 		}
 
@@ -101,9 +101,9 @@ namespace WordTree
 		void GrowKid()
 		{
 			float scale = .3f; //desired scale to grow kid to
-			GameObject kid = GameObject.FindGameObjectWithTag (Constants.Tags.TAG_KID);
+			GameObject kid = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_KID);
 			//Scale up kid to desired size
-			LeanTween.scale (kid, new Vector3 (scale, scale, 1f), 1f);
+			LeanTween.scale(kid, new Vector3 (scale, scale, 1f), 1f);
 		}
 
 		//Change color and transparency of objects
@@ -127,24 +127,24 @@ namespace WordTree
 			int numCompleted = 0; //counter for number of words completed in the scene
 
 			//Find word objects
-			GameObject[] gos = GameObject.FindGameObjectsWithTag (Constants.Tags.TAG_WORD_OBJECT);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_WORD_OBJECT);
 			foreach (GameObject go in gos) {
 				//if current scene is Learn Spelling
 				if (ProgressManager.currentMode == 1){
 					//completed a word; update counter
-					if (ProgressManager.completedWordsLearn.Contains (go.name))
+					if (ProgressManager.completedWordsLearn.Contains(go.name))
 						numCompleted = numCompleted + 1;
 				}
 				//if current scene is Spelling Game
 				if (ProgressManager.currentMode == 2){
 					//completed a word; update counter
-					if (ProgressManager.completedWordsSpell.Contains (go.name))
+					if (ProgressManager.completedWordsSpell.Contains(go.name))
 						numCompleted = numCompleted + 1;
 				}
 				//if current scene is Sound Game
 				if (ProgressManager.currentMode == 3){
 					//completed a word; update counter
-					if (ProgressManager.completedWordsSound.Contains (go.name))
+					if (ProgressManager.completedWordsSound.Contains(go.name))
 						numCompleted = numCompleted + 1;
 				}
 			}
@@ -152,7 +152,7 @@ namespace WordTree
 			//check if all words have been completed
 			//by comparing number of completed words with the number of word objects in the scene
 			if (numCompleted == gos.Length) {
-				Debug.Log ("Level Completed: " + ProgressManager.currentLevel);
+				Debug.Log("Level Completed: " + ProgressManager.currentLevel);
 				return true;
 			}
 			return false;
@@ -164,7 +164,7 @@ namespace WordTree
 		void CreateBackGround(string name, Vector3 posn, float scale)
 		{
 			//Find background object
-			GameObject background = GameObject.Find ("Background");
+			GameObject background = GameObject.Find("Background");
 
 			//load image
 			SpriteRenderer spriteRenderer = background.AddComponent<SpriteRenderer>();
@@ -187,16 +187,16 @@ namespace WordTree
 		{
 			//Get properties of the level, including the words included in the level, the position of the background image, 
 			// and the desired scale of the background image
-			LevelProperties prop = LevelProperties.GetLevelProperties (level);
-			string[] words = prop.Words ();
-			Vector3 backgroundPosn = prop.BackgroundPosn ();
-			float backgroundScale = prop.BackgroundScale ();
+			LevelProperties prop = LevelProperties.GetLevelProperties(level);
+			string[] words = prop.Words();
+			Vector3 backgroundPosn = prop.BackgroundPosn();
+			float backgroundScale = prop.BackgroundScale();
 
 			//Create word objects
-			LevelCreation.CreateWordObjects (level, words);
+			LevelCreation.CreateWordObjects(level, words);
 
 			//Create background
-			CreateBackGround (level, backgroundPosn, backgroundScale);
+			CreateBackGround(level, backgroundPosn, backgroundScale);
 
 		}
 
