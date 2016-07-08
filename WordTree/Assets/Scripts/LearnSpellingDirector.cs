@@ -35,6 +35,7 @@ namespace WordTree
 			StartCoroutine(ExplodeWord(1));
 			// then enable collisions to occur
 			StartCoroutine(EnableCollisions(2));
+
 			//Possible regions where letters can move
 			//TODO make sure these locations are on the screen
 			points.Add(new Vector3(-5.5f, 3.5f, 0f)); 
@@ -69,36 +70,28 @@ namespace WordTree
 		// currently handles words with 3-5 letters
 		IEnumerator ExplodeWord(float delayTime)
 		{
-			
-
-			//List of locations already used for letters
+			//wait for scene to load before exploding
 			yield return new WaitForSeconds(delayTime);
+
 			// find movable letters
 			GameObject[] gos = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
 			System.Random rnd = new System.Random();
 
-			//randomize list of points that letters can move too
+			//randomize the positions that letters can explode too
 			 this.points= this.points.OrderBy(x => rnd.Next ()).ToList();
-
-
 			//move each letter to a random position
 			for (int i=0; i<gos.Length; i++)
 			{
-				//if we have more letters than points then do not move anything to prevent
-				//objects from colliding
+				//if we have more letters than points to move them to, then we should not 
+				//try to move the letters; otherwise, app will throw error and crash
 				if (i >= points.Count) {
 					Debug.LogError("We have more letters (" + gos.Length + ") than positions to "
-					+ "explode them to (" + points.Count + ")! We moved all we can.");
+						+ "explode them to (" + points.Count + ")! We moved all we can.");
 					break;
 				}
-					//get first point off newly shuffled list
-					//Vector3 new_position = points[0];
-					//move letter to new position
+					//move letter to new position and spin letter
 				    LeanTween.move(gos[i], points[i], 1.0f);
-				LeanTween.rotateAround(gos[i], Vector3.forward, 360f, 1.0f);
-					//Remove most recently used position from list to prevent
-					//letters from going to the same location
-					//points.RemoveAt(0);
+					LeanTween.rotateAround(gos[i], Vector3.forward, 360f, 1.0f);
 				} 
 			}
 
