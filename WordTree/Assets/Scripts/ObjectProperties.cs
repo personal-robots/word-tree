@@ -109,24 +109,15 @@ namespace WordTree
 						}
 						if (ProgressManager.currentMode == 3) 
 						{
-							cc2d.radius = 3f;
+							cc2d.radius = 5f;
 						}
 					}
 					if (go.tag == Constants.Tags.TAG_TARGET_BLANK) 
 					{
 						cc2d.radius = .3f;
 					}
-				}
-				if (go.tag == Constants.Tags.TAG_JAR) 
-				{
-					// add circle collider
-					// used to detect collisions
-					CircleCollider2D cc2d = go.AddComponent<CircleCollider2D>();
-					// set radius for circle collider
-					// want to set radius exactly so that it extends to the rim/opening of the jar
-					// so collisions will be detected when the user dragging a sound blank hits the rim
-					cc2d.radius = .5f;
-				}
+				} 
+
 				if (go.tag == Constants.Tags.TAG_MOVABLE_LETTER || go.tag == Constants.Tags.TAG_MOVABLE_BLANK) 
 				{
 					// add rigidbody if object is draggable
