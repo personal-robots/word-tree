@@ -18,17 +18,18 @@ namespace WordTree
 		AudioManager audioManager;
 		SpellingGameDirector spellinggame; 
 		LearnSpellingDirector learn_Spelling; 
-		SoundGameDirector sound_Game;
+		SoundGameDirector sound_Game; 
 		//<summary>
 		// Called when an object enters the collider of another object
 		// Set the target object as the trigger
 		//</summary>
 		void OnTriggerEnter2D(Collider2D other)
 		{
+			Debug.Log("New collision detected");
 			GestureManager gestureManager = GameObject.
 				FindGameObjectWithTag(Constants.Tags.TAG_GESTURE_MANAGER).GetComponent<GestureManager>();
-			AudioManager audioManager = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_AUDIO_MANAGER).GetComponent<AudioManager>();
-
+			AudioManager audioManager = GameObject.FindGameObjectWithTag(Constants.Tags.TAG_AUDIO_MANAGER)
+				.GetComponent<AudioManager>();
 			if (gestureManager != null)
 			{
 				// if the current scene is Learn Spelling
@@ -85,6 +86,11 @@ namespace WordTree
 				//only want to get these components if on the spelling or sound game
 				if (Application.loadedLevelName != "4. Learn Spelling") 
 				{
+					TransformGesture pg = other.gameObject.GetComponent<TransformGesture>();
+					if (pg != null) {
+						
+						pg.enabled = false;
+					}
 					//get properties component 
 					Properties prop = other.gameObject.GetComponent<Properties>();
 					//We track whether or not letters have been dragged into the right spots using this isinblank flag, 
@@ -93,6 +99,7 @@ namespace WordTree
 					if (prop != null) 
 					{
 						prop.isinblank = true; 
+						Debug.Log(prop.isinblank + " is for isinblank property");
 					}
 					else
 					{
@@ -107,7 +114,6 @@ namespace WordTree
 					if (Application.loadedLevelName == "5. Spelling Game") 
 					{
 						SpellingGameDirector spellinggame = GameObject.FindGameObjectWithTag("SpellingGameDirector").GetComponent<SpellingGameDirector>();
-
 						Debug.Log("Collision on " + other.name);
 						// stop pulsing letter
 						other.gameObject.GetComponent<PulseBehavior>().StopPulsing(other.gameObject);
@@ -126,7 +132,7 @@ namespace WordTree
 						// disable collisions for target blank
 						// so no other movable letters can collide with this blank anymore
 						Debug.Log("Disabled collisions for Blank " + gameObject.name);
-						Destroy(gameObject.GetComponent<CollisionManager>());
+						//Destroy(gameObject.GetComponent<CollisionManager>());
 						// if all letters have been dragged to a blank
 						if (CheckCompletedTargets(Constants.Tags.TAG_MOVABLE_LETTER)) 
 						{
@@ -134,7 +140,8 @@ namespace WordTree
 							if (!CheckCorrectSpelling(Constants.Tags.TAG_MOVABLE_LETTER)) 
 							{
 								// play try again animation
-								GameObject.FindGameObjectWithTag("SpellingGameDirector").GetComponent<SpellingGameDirector>().TryAgainAnimation();
+								GameObject.FindGameObjectWithTag("SpellingGameDirector").GetComponent<SpellingGameDirector>()
+									.TryAgainAnimation();
 								// mark the correct letters by changing their color
 								MarkCorrectLetters(1f);
 								// move incorrect letters back to original position
@@ -195,8 +202,8 @@ namespace WordTree
 						Collider2D[] jar = Physics2D.OverlapCircleAll(posn, .1f, 1, 1.5f, 0f);
 						LeanTween.color(jar[0].gameObject, color, .01f);
 						// disable collisions for target letter
-						Debug.Log("Disabled collisions for Letter " + gameObject.name);
-						Destroy(gameObject.GetComponent<CollisionManager>());
+						//Debug.Log("Disabled collisions for Letter " + gameObject.name);
+						//Destroy(gameObject.GetComponent<CollisionManager>());
 						// if all sound blanks have been dragged onto a jar
 						if (CheckCompletedTargets(Constants.Tags.TAG_MOVABLE_BLANK)) 
 						{
@@ -251,6 +258,35 @@ namespace WordTree
 			{
 				Debug.LogError("Cannot find gesture manager");
 			}
+		}
+
+		//<summary>
+		// Called when an object leaves the collider of another object
+		// Change color of object and "isinblank" component
+		//</summary>
+		void OnTriggerExit2D(Collider2D other){
+			Debug.Log("Exit detected");
+			Properties prop = other.gameObject.GetComponent<Properties>();
+			//We track whether or not letters have been dragged into the right spots using this isinblank flag, 
+			//which is set to true when the letter is in the right place.
+			//only change the flag if the gameObject has a properties component 
+			if (prop != null) 
+			{
+				prop.isinblank = false; 
+				Debug.Log(prop.isinblank + " is for isinblank property");
+			}
+			else
+			{
+				Debug.LogError("Properties are not attached");
+			}
+			if (Application.loadedLevelName == "5. Spelling Game"){
+			LeanTween.color(other.gameObject, Color.white, .1f);
+			}
+			if (Application.loadedLevelName == "6. Sound Game") {
+				
+				LeanTween.color(gameObject, Color.black, .01f);
+			}
+
 		}
 
 		//<summary>
@@ -473,6 +509,11 @@ namespace WordTree
 				// make sure sound blank is correct scale
 				go.transform.localScale = new Vector3(.3f, .3f, 1);
 				Debug.Log("Resetting incorrect sound " + go.name);
+				// find the jar that the sound object was dragged onto
+				Vector2 position = go.transform.position;
+				Collider2D[] jar = Physics2D.OverlapCircleAll(position, 2f, 1, 1.5f, 0);
+				// change color of letter back to white
+				LeanTween.color(jar[0].gameObject, Color.white, .01f).setDelay(delayTime);
 				// move sound blank up in y-direction and away from the target letters/jars
 				Vector3 posn = new Vector3(go.transform.position.x, 0, -2);
 				LeanTween.move(go, posn, 1.0f).setDelay(delayTime);
@@ -480,13 +521,8 @@ namespace WordTree
 				go.GetComponent<PulseBehavior>().StartPulsing(go, delayTime);
 				// allow for touch gestures for sound blank again
 				go.GetComponent<GestureManager>().EnableGestures(go);
-				// find the jar that the sound object was dragged onto
-				Vector2 position = go.transform.position;
-				Collider2D[] jar = Physics2D.OverlapCircleAll(position, 2f, 1, 1.5f, 0);
 				//spin incorrect letters
 				LeanTween.rotateAroundLocal(go, Vector3.up, 360f, 1);
-				// change color of letter back to white
-				LeanTween.color(jar[0].gameObject, Color.white, .01f).setDelay(delayTime);
 				//reset the is in blank variable so user can try again with incorrect sounds
 				go.GetComponent<Properties>().isinblank = false;
 			}	
@@ -605,6 +641,7 @@ namespace WordTree
 			foreach (GameObject go in mov) 
 			{
 				Properties props = go.GetComponent<Properties>();
+				Debug.Log(go.name + " is" + props.isinblank);
 				if (props != null)
 				{
 					if (!props.isinblank) 
@@ -669,6 +706,39 @@ namespace WordTree
 			}
 			return false;	
 		}
+
+		void Update()
+		{
+			if (Application.loadedLevelName == "5. Spelling Game") {
+				GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_LETTER);
+				foreach (GameObject letter in mov) {
+					//After 2 seconds, renable gestures so user can drag letter out of blank
+					if (Time.time > 2) {
+						TransformGesture pg = letter.GetComponent<TransformGesture>();
+						if (pg != null) {
+							//Debug.Log("I am enabling gestures");
+							pg.enabled = true;
+						}
+					}
+				}
+				
+			}
+			if (Application.loadedLevelName == "6. Sound Game") {
+				GameObject[] mov = GameObject.FindGameObjectsWithTag(Constants.Tags.TAG_MOVABLE_BLANK);
+				foreach (GameObject letter in mov) {
+					//After 2 seconds, renable gestures so user can drag sound off jar
+					if (Time.time > 2) {
+						TransformGesture pg = letter.GetComponent<TransformGesture>();
+						if (pg != null) {
+							//Debug.Log("I am enabling gestures");
+							pg.enabled = true;
+						}
+					}
+				}
+
+			}
+		}
+			
 			
 	}
 }

@@ -118,7 +118,7 @@ namespace WordTree
 				Vector3 letterPosn = new Vector3(go.transform.position.x, go.transform.position.y, 1.5f);
 				// instantiate jar behind letter
 				ObjectProperties jar = ObjectProperties.CreateInstance("Jar", "Jar", letterPosn, 
-					new Vector3(.45f, .45f, 1), "Jar", null);
+					new Vector3(.4f, .4f, 1f), "Jar", null);
 				ObjectProperties.InstantiateObject(jar);
 			}
 		}
